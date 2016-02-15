@@ -2,7 +2,6 @@ package org.usfirst.frc.team670.robot.subsystems;
 
 import org.usfirst.frc.team670.robot.RobotMap;
 import org.usfirst.frc.team670.robot.commands.DriveWithJoystick;
-
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -11,6 +10,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Subsystem for the drivebase containing things like the Talons
  */
 public class DriveBase extends Subsystem {
+	public static final double gearRatio = 10.71;
+	public static final double diameterInInches = 6;
+	public static final double circumferenceInInches = diameterInInches * Math.PI;
+	public static final double inchesPerTick = circumferenceInInches/360;
     public CANTalon leftTalon1;
     public CANTalon leftTalon2;
     public CANTalon rightTalon1;
@@ -39,6 +42,31 @@ public class DriveBase extends Subsystem {
     	
     	leftTalon1.set(left);
     	rightTalon1.set(right);
+    }
+    
+    public void driveDistanceInches(double inches){
+    	double numTicks = inches/inchesPerTick;
+		
+		leftTalon1.setEncPosition(0);
+		leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
+		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		leftTalon1.reverseSensor(true);
+		leftTalon1.setF(0.25);
+		leftTalon1.setPID(0.3, 0, 0);
+		leftTalon1.setCloseLoopRampRate(0);
+		leftTalon1.setIZone(0);
+		
+		rightTalon1.setEncPosition(0);
+		rightTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
+		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		rightTalon1.reverseSensor(true);
+		rightTalon1.setF(0.25);
+		rightTalon1.setPID(0.3, 0, 0);
+		rightTalon1.setCloseLoopRampRate(0);
+		rightTalon1.setIZone(0);
+		
+		leftTalon1.set(360);
+		rightTalon1.set(360);
     }
 }
 
