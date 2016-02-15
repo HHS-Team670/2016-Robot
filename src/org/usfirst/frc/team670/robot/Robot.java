@@ -2,6 +2,8 @@
 package org.usfirst.frc.team670.robot;
 
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
+import org.usfirst.frc.team670.robot.subsystems.Intake;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -18,6 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static DriveBase driveBase;
+	public static Intake robIntake;
 
     Command autonomousCommand;
     SendableChooser chooser;
@@ -29,6 +32,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
 		driveBase = new DriveBase();
+		robIntake = new Intake();
     }
 	
 	/**

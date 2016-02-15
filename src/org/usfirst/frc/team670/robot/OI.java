@@ -1,6 +1,8 @@
 package org.usfirst.frc.team670.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -10,7 +12,10 @@ public class OI {
 	
 	private Joystick leftDriveStick = new Joystick(RobotMap.leftDriveStick);
 	private Joystick rightDriveStick = new Joystick(RobotMap.rightDriveStick);
-	private Joystick operatorStick = new Joystick(RobotMap.operatorStick);
+	public static Joystick operatorStick = new Joystick(RobotMap.operatorStick);
+	
+	public static Button operatorButton = new JoystickButton(operatorStick, 1);
+
 	
 	public Joystick getleftStick(){
 		return leftDriveStick;
@@ -23,5 +28,6 @@ public class OI {
 	public Joystick getOperatorStick(){
 		return operatorStick;
 	}
+
 }
 
