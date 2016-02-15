@@ -11,10 +11,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Subsystem for the drivebase containing things like the Talons
  */
 public class DriveBase extends Subsystem {
-	public static final double gearRatio = 0;
-	public static final double diameterInInches = 0;
-	public static final double circumferenceInInches = diameterInInches * Math.PI;
-	public static final double inchesPerTick = circumferenceInInches/360;
     public CANTalon leftTalon1;
     public CANTalon leftTalon2;
     public CANTalon rightTalon1;
@@ -44,30 +40,5 @@ public class DriveBase extends Subsystem {
     	leftTalon1.set(left);
     	rightTalon1.set(right);
     }
-    
-    public void MoveDistanceInches(double inches){
-		double numTicks = inches/inchesPerTick;
-		
-		leftTalon1.setEncPosition(0);
-		leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
-		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		leftTalon1.reverseSensor(true);
-		leftTalon1.setF(0.25);
-		leftTalon1.setPID(0.3, 0, 0);
-		leftTalon1.setCloseLoopRampRate(0);
-		leftTalon1.setIZone(0);
-		
-		rightTalon1.setEncPosition(0);
-		rightTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
-		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		rightTalon1.reverseSensor(true);
-		rightTalon1.setF(0.25);
-		rightTalon1.setPID(0.3, 0, 0);
-		rightTalon1.setCloseLoopRampRate(0);
-		rightTalon1.setIZone(0);
-		
-		rightTalon1.set(360);
-		leftTalon1.set(360);
-	}
 }
 
