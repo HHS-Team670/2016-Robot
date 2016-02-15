@@ -4,6 +4,7 @@ import org.usfirst.frc.team670.robot.RobotMap;
 import org.usfirst.frc.team670.robot.commands.DriveWithJoystick;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -19,6 +20,7 @@ public class DriveBase extends Subsystem {
     public CANTalon rightTalon1;
     public CANTalon rightTalon2;
     
+    private Timer speedTimer;
     
     public DriveBase(){
     	leftTalon1 = new CANTalon(RobotMap.leftMotor1);
@@ -30,6 +32,8 @@ public class DriveBase extends Subsystem {
     	leftTalon2.set(RobotMap.leftMotor1);
     	rightTalon2.changeControlMode(CANTalon.TalonControlMode.Follower);
     	rightTalon2.set(RobotMap.rightMotor1);
+    	
+    	speedTimer = new Timer();
     }
 
     public void initDefaultCommand() {
