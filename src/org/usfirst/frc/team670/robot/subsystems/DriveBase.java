@@ -65,8 +65,22 @@ public class DriveBase extends Subsystem {
 		rightTalon1.setCloseLoopRampRate(0);
 		rightTalon1.setIZone(0);
 		
-		leftTalon1.set(360);
-		rightTalon1.set(360);
+		leftTalon1.set(1440);
+		rightTalon1.set(1440);
+    }
+    
+    public void setSpeed(double speed){
+    	leftTalon1.changeControlMode(CANTalon.TalonControlMode.Speed);
+    	leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	leftTalon1.setF(0.25);
+		leftTalon1.setPID(0.3, 0, 0);
+		leftTalon1.set(48);
+    	
+    	rightTalon1.changeControlMode(CANTalon.TalonControlMode.Speed);
+    	rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	rightTalon1.setF(0.25);
+		rightTalon1.setPID(0.3, 0, 0);
+		rightTalon1.set(48);
     }
 }
 
