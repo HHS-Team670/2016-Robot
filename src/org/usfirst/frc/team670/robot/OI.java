@@ -12,10 +12,10 @@ public class OI {
 	
 	private Joystick leftDriveStick = new Joystick(RobotMap.leftDriveStick);
 	private Joystick rightDriveStick = new Joystick(RobotMap.rightDriveStick);
-	public static Joystick operatorStick = new Joystick(RobotMap.operatorStick);
+	private Joystick operatorStick = new Joystick(RobotMap.operatorStick);
 	
-	public static Button operatorButton = new JoystickButton(operatorStick, 1);
-
+	private Button operatorButton = new JoystickButton(operatorStick, 1);
+	
 	
 	public Joystick getleftStick(){
 		return leftDriveStick;
@@ -27,6 +27,10 @@ public class OI {
 	
 	public Joystick getOperatorStick(){
 		return operatorStick;
+	}
+	
+	public Button getOperatorButton() {
+		return operatorButton;
 	}
 
 }

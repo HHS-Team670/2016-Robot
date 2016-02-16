@@ -1,27 +1,8 @@
 package org.usfirst.frc.team670.robot.commands;
-
-import org.usfirst.frc.team670.robot.subsystems.SolenoidMovement;
-
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import org.usfirst.frc.team670.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SolenoidMovementCommand extends Command{
-		
-		public static Boolean onOff;
-		
-	    public SolenoidMovementCommand() {
-	    	if(onOff == false){
-				SolenoidMovement.sole.set(DoubleSolenoid.Value.kForward);
-				onOff = true;
-			}
-	    	else if(onOff == true){
-	    		SolenoidMovement.sole.set(DoubleSolenoid.Value.kReverse);
-				onOff = false;
-	    	}
-	    	else{
-	    		SolenoidMovement.sole.set(DoubleSolenoid.Value.kOff);
-	    	}
-	    		    	}
+public class SolenoidMovementCommand extends Command{		
 	        // Use requires() here to declare subsystem dependencies
 	    		
 	    public void movement() {
@@ -35,6 +16,7 @@ public class SolenoidMovementCommand extends Command{
 
 	    // Called repeatedly when this Command is scheduled to run
 	    public void execute() {	
+	    	Robot.robIntake.moveSolenoid();
 	    	
 	    }
 	    

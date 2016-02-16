@@ -1,5 +1,4 @@
 package org.usfirst.frc.team670.robot.commands;
-import org.usfirst.frc.team670.robot.OI;
 import org.usfirst.frc.team670.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -16,8 +15,8 @@ public class IntakeCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     public void execute() {	
-    	double talonPlacement = OI.operatorStick.getY();
-    	Robot.robIntake.placement(talonPlacement);
+    	double talonPlacement = Robot.oi.getOperatorStick().getY();
+    	Robot.robIntake.placeSolenoid(talonPlacement);
     	
     }
     
