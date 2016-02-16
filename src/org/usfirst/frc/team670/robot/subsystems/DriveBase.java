@@ -20,8 +20,6 @@ public class DriveBase extends Subsystem {
     public CANTalon rightTalon1;
     public CANTalon rightTalon2;
     
-    private Timer speedTimer;
-    
     public DriveBase(){
     	leftTalon1 = new CANTalon(RobotMap.leftMotor1);
     	leftTalon2 = new CANTalon(RobotMap.leftMotor2);
@@ -32,8 +30,6 @@ public class DriveBase extends Subsystem {
     	leftTalon2.set(RobotMap.leftMotor1);
     	rightTalon2.changeControlMode(CANTalon.TalonControlMode.Follower);
     	rightTalon2.set(RobotMap.rightMotor1);
-    	
-    	speedTimer = new Timer();
     }
 
     public void initDefaultCommand() {
@@ -57,8 +53,8 @@ public class DriveBase extends Subsystem {
 		leftTalon1.reverseSensor(true);
 		leftTalon1.setF(0.25);
 		leftTalon1.setPID(0.3, 0, 0);
-		leftTalon1.setCloseLoopRampRate(0);
-		leftTalon1.setIZone(0);
+		//leftTalon1.setCloseLoopRampRate(0);
+		//leftTalon1.setIZone(0);
 		
 		rightTalon1.setEncPosition(0);
 		rightTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
@@ -66,8 +62,8 @@ public class DriveBase extends Subsystem {
 		rightTalon1.reverseSensor(true);
 		rightTalon1.setF(0.25);
 		rightTalon1.setPID(0.3, 0, 0);
-		rightTalon1.setCloseLoopRampRate(0);
-		rightTalon1.setIZone(0);
+		//rightTalon1.setCloseLoopRampRate(0);
+		//rightTalon1.setIZone(0);
 		
 		leftTalon1.set(1440);
 		rightTalon1.set(1440);
@@ -76,12 +72,14 @@ public class DriveBase extends Subsystem {
     public void setSpeed(double speed){
     	leftTalon1.changeControlMode(CANTalon.TalonControlMode.Speed);
     	leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	leftTalon1.reverseSensor(true);
     	leftTalon1.setF(0.25);
 		leftTalon1.setPID(0.3, 0, 0);
 		leftTalon1.set(48);
     	
     	rightTalon1.changeControlMode(CANTalon.TalonControlMode.Speed);
     	rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	rightTalon1.reverseSensor(true);
     	rightTalon1.setF(0.25);
 		rightTalon1.setPID(0.3, 0, 0);
 		rightTalon1.set(48);
