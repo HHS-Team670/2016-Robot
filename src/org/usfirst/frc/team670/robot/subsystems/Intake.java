@@ -7,6 +7,7 @@ import org.usfirst.frc.team670.robot.commands.SolenoidMovementCommand;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -18,6 +19,7 @@ public class Intake extends Subsystem {
 	private boolean onOff;
 	private Talon soleTalon;
 	private Value command;
+	private Button button;
 
 	
 	public Intake() {
@@ -34,6 +36,7 @@ public class Intake extends Subsystem {
 	public void solenoidCommand() {
 		if(onOff == false){
 			this.command = DoubleSolenoid.Value.kForward;
+			onOff = true;
 			}
     	else if(onOff == true){
     		this.command = DoubleSolenoid.Value.kReverse;
@@ -45,7 +48,7 @@ public class Intake extends Subsystem {
 	}
 	
 	public void moveSolenoid() {
-		Robot.oi.getOperatorButton().whenPressed(sole.set(this.command));
+		Robot.oi.getOperatorButton().whileHeld(sole.set(this.command));
     	}
 
     // Put methods for controlling this subsystem
