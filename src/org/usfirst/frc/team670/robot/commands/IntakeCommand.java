@@ -16,7 +16,7 @@ public class IntakeCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     public void execute() {	
     	double talonPlacement = Robot.oi.getOperatorStick().getY();
-    	Robot.robIntake.placeSolenoid(talonPlacement);
+    	Robot.robIntake.spinIntake(talonPlacement);
     	
     }
     

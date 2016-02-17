@@ -15,42 +15,37 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Intake extends Subsystem {
-	private DoubleSolenoid sole;
-	private boolean onOff;
-	private Talon soleTalon;
-	private Value command;
-	private Button button;
+	private DoubleSolenoid intakeSole;
+	private int positionIdentifier;
+	private Talon intakeTalon;
+	private Value solePosition;
 
-	
 	public Intake() {
-		soleTalon = new Talon(3);	
-		sole = new DoubleSolenoid(1,2);
-		onOff = false;	
+		intakeTalon = new Talon(0);	
+		intakeSole = new DoubleSolenoid(0, 1);
+		positionSwitch = 0;	
 		//Robot.oi.getOperatorButton().whenPressed(new SolenoidMovementCommand());
 	}
 	
-	public void placeSolenoid (double talonY) {
-		soleTalon.set(talonY);
+	public void spinIntake (double talonY) {
+		intakeTalon.set(talonY);
 	}
-	
-	public void solenoidCommand() {
-		if(onOff == false){
-			this.command = DoubleSolenoid.Value.kForward;
-			onOff = true;
-			}
-    	else if(onOff == true){
-    		this.command = DoubleSolenoid.Value.kReverse;
-			onOff = false;
-    		}
-    	else{
-    		command = DoubleSolenoid.Value.kOff;
-    		}
-	}
-	
-	public void moveSolenoid() {
-		Robot.oi.getOperatorButton().whileHeld(sole.set(this.command));
-    	}
 
+	public void switchPosition() {
+		if(positionIdentifier == 1){
+			solePosition = DoubleSolenoid.Value.kForward;
+			}
+    	else if(positionIdentifier == 2){
+    		solePosition = DoubleSolenoid.Value.kReverse;
+    		}
+    	else if(positionIdentifier == 3){
+    		solePosition = DoubleSolenoid.Value.kOff;
+    		}
+	}
+	
+	public void switchIdentifier(){
+		
+	}
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
