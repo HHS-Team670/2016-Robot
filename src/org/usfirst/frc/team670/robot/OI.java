@@ -1,6 +1,10 @@
 package org.usfirst.frc.team670.robot;
 
+import org.usfirst.frc.team670.robot.commands.Shoot;
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -11,6 +15,12 @@ public class OI {
 	private Joystick leftDriveStick = new Joystick(RobotMap.leftDriveStick);
 	private Joystick rightDriveStick = new Joystick(RobotMap.rightDriveStick);
 	private Joystick operatorStick = new Joystick(RobotMap.operatorStick);
+	
+	private Button shootButton = new JoystickButton(operatorStick, 1);
+	
+	public OI(){
+		shootButton.whenPressed(new Shoot());
+	}
 	
 	public Joystick getleftStick(){
 		return leftDriveStick;
