@@ -17,7 +17,7 @@ public class OI {
 	private Joystick operatorStick = new Joystick(RobotMap.operatorStick);
 	
 	private Button spinButt = new JoystickButton(operatorStick, 2);
-	private Button intakePosButt = new JoystickButton(operatorStick, 2);
+	private Button intakePosButt = new JoystickButton(operatorStick, 6);
 	
 	public OI(){
 		spinButt.whileHeld(new SpinIntake());

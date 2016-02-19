@@ -1,6 +1,6 @@
 package org.usfirst.frc.team670.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Intake extends Subsystem {
-	private DoubleSolenoid intakeSole;
+	private Solenoid intakeSole;
 	private Talon intakeTalon;
 
 	public Intake() {
 		intakeTalon = new Talon(0);	
-		intakeSole = new DoubleSolenoid(0, 1);
+		intakeSole = new Solenoid(2);
 	}
 	
 	public void spinIntake () {
@@ -25,7 +25,10 @@ public class Intake extends Subsystem {
 	}
 
 	public void switchPosition() {
-	
+		if(intakeSole.get()  == true)
+			intakeSole.set(false);
+		if(intakeSole.get() == false)
+			intakeSole.set(true);
 	}
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
