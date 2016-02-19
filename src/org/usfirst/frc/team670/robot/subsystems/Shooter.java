@@ -19,7 +19,8 @@ public class Shooter extends Subsystem {
 	public Shooter(){
 		shooterTalon = new Talon(1);
 		accelTimer = new Timer();
-		pushSole = new Solenoid(2);
+		pushSole = new Solenoid(1);
+		shooterSole = new Solenoid(0);
 	}
 
 	public void spin(double operator){
