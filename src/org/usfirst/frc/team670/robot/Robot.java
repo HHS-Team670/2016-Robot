@@ -32,6 +32,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
 		driveBase = new DriveBase();
+		shooter = new Shooter();
     }
 	
 	/**

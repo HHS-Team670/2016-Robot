@@ -1,6 +1,8 @@
 package org.usfirst.frc.team670.robot;
 
 import org.usfirst.frc.team670.robot.commands.Shoot;
+import org.usfirst.frc.team670.robot.commands.SwitchPusher;
+import org.usfirst.frc.team670.robot.commands.SwitchShooter;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -16,10 +18,12 @@ public class OI {
 	private Joystick rightDriveStick = new Joystick(RobotMap.rightDriveStick);
 	private Joystick operatorStick = new Joystick(RobotMap.operatorStick);
 	
-	private Button shootButton = new JoystickButton(operatorStick, 1);
+	private Button shootButt = new JoystickButton(operatorStick, 1);
+	private Button shootPosButt = new JoystickButton(operatorStick, 6);
 	
 	public OI(){
-		shootButton.whenPressed(new Shoot());
+		shootButt.whenPressed(new SwitchPusher());
+		shootPosButt.whenPressed(new SwitchShooter());
 	}
 	
 	public Joystick getleftStick(){
