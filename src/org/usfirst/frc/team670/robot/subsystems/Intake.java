@@ -29,7 +29,7 @@ public class Intake extends Subsystem {
 			intakeSole.set(false);
 		if(intakeSole.get() == false)
 			intakeSole.set(true);
-	}
+	}	
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
