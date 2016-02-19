@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static DriveBase driveBase;
-	public static Intake robIntake;
+	public static Intake intake;
 
     Command autonomousCommand;
     SendableChooser chooser;
@@ -32,7 +32,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
 		driveBase = new DriveBase();
-		robIntake = new Intake();
+		intake = new Intake();
     }
 	
 	/**

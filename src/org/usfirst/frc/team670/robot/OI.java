@@ -1,5 +1,7 @@
 package org.usfirst.frc.team670.robot;
 
+import org.usfirst.frc.team670.robot.commands.MoveIntake;
+import org.usfirst.frc.team670.robot.commands.SpinIntake;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -14,8 +16,13 @@ public class OI {
 	private Joystick rightDriveStick = new Joystick(RobotMap.rightDriveStick);
 	private Joystick operatorStick = new Joystick(RobotMap.operatorStick);
 	
-	private Button operatorButton = new JoystickButton(operatorStick, 1);
+	private Button spinButt = new JoystickButton(operatorStick, 2);
+	private Button intakePosButt = new JoystickButton(operatorStick, 2);
 	
+	public OI(){
+		spinButt.whileHeld(new SpinIntake());
+		intakePosButt.whenPressed(new MoveIntake())
+;	}
 	
 	public Joystick getleftStick(){
 		return leftDriveStick;
@@ -29,9 +36,5 @@ public class OI {
 		return operatorStick;
 	}
 	
-	public Button getOperatorButton() {
-		return operatorButton;
-	}
-
 }
 

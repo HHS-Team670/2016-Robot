@@ -2,27 +2,19 @@ package org.usfirst.frc.team670.robot.commands;
 import org.usfirst.frc.team670.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SolenoidMovementCommand extends Command{		
+public class MoveIntake extends Command{		
 	        // Use requires() here to declare subsystem dependencies
 	    		
-	    public void movement() {
-			
-			
-		}
-
 	    // Called just before this Command runs the first time
 	    protected void initialize() {
 	    }
 
 	    // Called repeatedly when this Command is scheduled to run
 	    public void execute() {	
-	    	Robot.robIntake.switchPosition();
-	    	
+	    	Robot.intake.switchPosition();
 	    }
-	    
 
 	    // Make this return true when this Command no longer needs to run execute()
-	    
 	    protected boolean isFinished() {
 	        return true;
 	    }
