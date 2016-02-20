@@ -2,7 +2,11 @@
 package org.usfirst.frc.team670.robot;
 
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
+<<<<<<< HEAD
 import org.usfirst.frc.team670.robot.subsystems.Intake;
+=======
+import org.usfirst.frc.team670.robot.subsystems.Shooter;
+>>>>>>> shooter
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -21,6 +25,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static DriveBase driveBase;
 	public static Intake intake;
+	public static Shooter shooter;
 
     Command autonomousCommand;
     SendableChooser chooser;
@@ -30,9 +35,10 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-		oi = new OI();
 		driveBase = new DriveBase();
 		intake = new Intake();
+		shooter = new Shooter();
+		oi = new OI();
     }
 	
 	/**

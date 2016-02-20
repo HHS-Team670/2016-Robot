@@ -2,6 +2,9 @@ package org.usfirst.frc.team670.robot;
 
 import org.usfirst.frc.team670.robot.commands.MoveIntake;
 import org.usfirst.frc.team670.robot.commands.SpinIntake;
+import org.usfirst.frc.team670.robot.commands.Shoot;
+import org.usfirst.frc.team670.robot.commands.SwitchPusher;
+import org.usfirst.frc.team670.robot.commands.SwitchShooter;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -15,14 +18,18 @@ public class OI {
 	private Joystick leftDriveStick = new Joystick(RobotMap.leftDriveStick);
 	private Joystick rightDriveStick = new Joystick(RobotMap.rightDriveStick);
 	private Joystick operatorStick = new Joystick(RobotMap.operatorStick);
-	
 	private Button spinButt = new JoystickButton(operatorStick, 2);
 	private Button intakePosButt = new JoystickButton(operatorStick, 6);
+	private Button shootButt = new JoystickButton(operatorStick, 1);
+	private Button shootPosButt = new JoystickButton(operatorStick, 6);
 	
 	public OI(){
 		spinButt.whileHeld(new SpinIntake());
-		intakePosButt.whenPressed(new MoveIntake())
-;	}
+		intakePosButt.whenPressed(new MoveIntake());
+		shootButt.whenPressed(new SwitchPusher());
+		shootPosButt.whenPressed(new SwitchShooter());
+
+	}
 	
 	public Joystick getleftStick(){
 		return leftDriveStick;
