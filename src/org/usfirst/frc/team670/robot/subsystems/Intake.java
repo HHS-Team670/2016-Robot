@@ -25,10 +25,7 @@ public class Intake extends Subsystem {
 	}
 
 	public void switchPosition() {
-		if(intakeSole.get()  == true)
-			intakeSole.set(false);
-		if(intakeSole.get() == false)
-			intakeSole.set(true);
+		intakeSole.set(!intakeSole.get());
 	}	
     // Put methods for controlling this subsystem
     // here. Call these from Commands.

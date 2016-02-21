@@ -2,12 +2,8 @@
 package org.usfirst.frc.team670.robot;
 
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
-<<<<<<< HEAD
 import org.usfirst.frc.team670.robot.subsystems.Intake;
-=======
 import org.usfirst.frc.team670.robot.subsystems.Shooter;
->>>>>>> shooter
-
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;

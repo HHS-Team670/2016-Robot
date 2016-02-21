@@ -40,17 +40,11 @@ public class Shooter extends Subsystem {
 	}
 	
 	public void switchPusherPosition(){
-		if(pushSole.get() == true)
-			pushSole.set(false);
-		if(pushSole.get() == false)
-			pushSole.set(true);
+		pushSole.set(!pushSole.get());
 	}
 	
 	public void switchShooterPosition(){
-		if(shooterSole.get() == true)
-			shooterSole.set(false);
-		if(shooterSole.get() == false)
-			shooterSole.set(true);
+		shooterSole.set(!shooterSole.get());
 	}
 	
     public void initDefaultCommand() {
