@@ -1,18 +1,54 @@
 package org.usfirst.frc.team670.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc.team670.robot.commands.SpinWithJoystick;
 
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
 public class Shooter extends Subsystem {
     
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+	private Talon shooterTalon;
+	private Timer accelTimer;
+	private Solenoid pushSole;
+	private Solenoid shooterSole;
+	
+	public Shooter(){
+		shooterTalon = new Talon(1);
+		accelTimer = new Timer();
+		pushSole = new Solenoid(1);
+		shooterSole = new Solenoid(0);
+	}
 
+	public void spin(double operator){
+		shooterTalon.set(operator);
+	}
+	
+	public void shoot(){
+		accelTimer.start();
+		
+		if(accelTimer.get() <= .5)
+			shooterTalon.set(0.25);
+		if(accelTimer.get() <= 1)
+			shooterTalon.set(0.5);
+		if(accelTimer.get() <= 1.5)
+			shooterTalon.set(0.75);
+		shooterTalon.set(1);		
+	}
+	
+	public void switchPusherPosition(){
+		pushSole.set(!pushSole.get());
+	}
+	
+	public void switchShooterPosition(){
+		shooterSole.set(!shooterSole.get());
+	}
+	
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new SpinWithJoystick());
     }
 }
 
