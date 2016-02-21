@@ -18,16 +18,20 @@ public class OI {
 	private Joystick leftDriveStick = new Joystick(RobotMap.leftDriveStick);
 	private Joystick rightDriveStick = new Joystick(RobotMap.rightDriveStick);
 	private Joystick operatorStick = new Joystick(RobotMap.operatorStick);
-	private Button spinButt = new JoystickButton(operatorStick, 2);
-	private Button intakePosButt = new JoystickButton(operatorStick, 6);
-	private Button shootButt = new JoystickButton(operatorStick, 1);
-	private Button shootPosButt = new JoystickButton(operatorStick, 6);
+	private Joystick arcButtons = new Joystick(RobotMap.arcButtons);
+	
+	private Button intakePosButt = new JoystickButton(operatorStick, 5);
+	private Button intakeRollerButt = new JoystickButton(operatorStick, 2);
+	private Button hingePlateButt = new JoystickButton(operatorStick, 3);
+	private Button shootPosButt = new JoystickButton(operatorStick, 4);
+	private Button testShootButt = new JoystickButton(operatorStick, 1);
 	
 	public OI(){
-		spinButt.whileHeld(new SpinIntake());
+		intakeRollerButt.whileHeld(new SpinIntake());
 		intakePosButt.whenPressed(new MoveIntake());
-		shootButt.whenPressed(new SwitchPusher());
+		hingePlateButt.whenPressed(new SwitchPusher());
 		shootPosButt.whenPressed(new SwitchShooter());
+		testShootButt.whenPressed(new Shoot());
 
 	}
 	
@@ -43,5 +47,8 @@ public class OI {
 		return operatorStick;
 	}
 	
+	public Joystick getArcButtons(){
+		return arcButtons;
+	}
 }
 

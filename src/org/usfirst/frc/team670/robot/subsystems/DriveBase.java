@@ -45,7 +45,7 @@ public class DriveBase extends Subsystem {
     	rightTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
     	
     	leftTalon1.set(left);
-    	rightTalon1.set(right);
+    	rightTalon1.set(-right);
     }
     
     public void driveDistanceInches(double inches){
@@ -74,16 +74,18 @@ public class DriveBase extends Subsystem {
     }
    
     public void turnLeft(double degrees, double startAngle){
-    	if(gyro.getAngle() > startAngle - degrees){
-    		leftTalon1.set(-.75);
-    		rightTalon1.set(.75);
+    	if(gyro.getAngle() < startAngle + degrees){
+    		//System.out.println(degrees + "    " + startAngle);
+    		//leftTalon1.set(1);
+    		//rightTalon1.set(0);
     	}
     }
     
     public void turnRight(double degrees, double startAngle){
     	if(gyro.getAngle() < startAngle + degrees){
-    		leftTalon1.set(.75);
-    		rightTalon1.set(-.75);
+    		System.out.println(degrees + "    " + startAngle);
+    		//leftTalon1.set(0);
+    		//rightTalon1.set(1);
     	}
     }
     

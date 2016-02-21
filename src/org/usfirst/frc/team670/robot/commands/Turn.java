@@ -10,7 +10,9 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Turn extends Command {
 
 	private double startAngle;
-	double turnDegrees;
+	private double turnDegrees;
+	private boolean direction;
+	
 	
     public Turn(double turnDegrees) {
         requires(Robot.driveBase);
@@ -20,13 +22,17 @@ public class Turn extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	startAngle = Robot.driveBase.getAngle();
+    	if(turnDegrees > 0)
+    		direction = true;
+    	else if(turnDegrees < 0)
+    		direction = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(turnDegrees > 0)
+    	if(direction)
     		Robot.driveBase.turnRight(turnDegrees, startAngle);
-    	if(turnDegrees < 0)
+    	else if(!direction)
     		Robot.driveBase.turnLeft(turnDegrees, startAngle);
     }
 
