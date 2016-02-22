@@ -2,7 +2,7 @@ package org.usfirst.frc.team670.robot.commands;
 import org.usfirst.frc.team670.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class MoveIntake extends Command{		
+public class MoveIntake extends Command{
 	        // Use requires() here to declare subsystem dependencies
 		public MoveIntake() {
 			requires(Robot.driveBase);
