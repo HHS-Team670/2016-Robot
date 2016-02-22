@@ -31,13 +31,13 @@ public class Shooter extends Subsystem {
 	public void shoot(){
 		accelTimer.start();
 		
-		if(accelTimer.get() <= .5)
+		if(accelTimer.get() <= .5) 
 			shooterTalon.set(0.25);
-		if(accelTimer.get() <= 1)
+		if(accelTimer.get() <= 1) 
 			shooterTalon.set(0.5);
-		if(accelTimer.get() <= 1.5)
+		if(accelTimer.get() <= 1.5) 
 			shooterTalon.set(0.75);
-		shooterTalon.set(1);		
+			shooterTalon.set(1);
 	}
 	
 	public void switchPusherPosition(){
@@ -57,9 +57,14 @@ public class Shooter extends Subsystem {
 		pusherChecker = newValue;
 	}
 	
+	public boolean getShooterPosition() {
+		return shooterSole.get();
+	}
+	
 	
     public void initDefaultCommand() {
         setDefaultCommand(new SpinWithJoystick());
     }
+
 }
 
