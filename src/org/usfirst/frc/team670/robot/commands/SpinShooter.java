@@ -7,14 +7,15 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Shoot extends Command {
-
-	private double time;
+public class SpinShooter extends Command {
 	
-    public Shoot(double time) {
-    	super(time);
-        requires(Robot.shooter);
-        this.time = time;
+	private double speed;
+	
+    public SpinShooter(double speed) {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.shooter);
+    	this.speed = speed;
     }
 
     // Called just before this Command runs the first time
@@ -23,17 +24,17 @@ public class Shoot extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooter.shoot(time);
+    	Robot.shooter.spin(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return isTimedOut(); //WILL RETURN TRUE AFTER PUSHER RETURNS TO STARTING POSITION
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	
+    	Robot.shooter.spin(0);
     }
 
     // Called when another command which requires one or more of the same
