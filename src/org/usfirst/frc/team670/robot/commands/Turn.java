@@ -12,6 +12,7 @@ public class Turn extends Command {
 	private double startAngle;
 	private double turnDegrees;
 	private boolean direction;
+	private boolean finished;
 	
 	
     public Turn(double turnDegrees) {
@@ -31,14 +32,14 @@ public class Turn extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(direction)
-    		Robot.driveBase.turnRight(turnDegrees, startAngle);
+    		finished = Robot.driveBase.turnRight(turnDegrees, startAngle);
     	else if(!direction)
-    		Robot.driveBase.turnLeft(turnDegrees, startAngle);
+    		finished = Robot.driveBase.turnLeft(turnDegrees, startAngle);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return finished;
     }
 
     // Called once after isFinished returns true
