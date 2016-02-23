@@ -23,9 +23,9 @@ public class Shooter extends Subsystem {
 		pushSole = new Solenoid(1);
 		shooterSole = new Solenoid(0);
 	}
-
-	public void spin(double operator){
-		shooterTalon.set(operator);
+	
+	public double getAccelTimer() {
+		return accelTimer.get();
 	}
 	
 	public void shoot(){
@@ -40,9 +40,30 @@ public class Shooter extends Subsystem {
 			shooterTalon.set(1);
 	}
 	
+	public void setShooter(double speed) {
+		shooterTalon.set(speed);
+	}
+	
+	public void setShooterPosition(boolean boo){
+		shooterSole.set(boo);
+	}
+	
+	public void setPusherOut() {
+		pushSole.set(true);
+	}
+	
+	public void setPusherIn() {
+		pushSole.set(false);
+	}
+	
 	public void switchPusherPosition(){
 		pushSole.set(!pushSole.get());
-		pusherChecker++;
+		Timer.delay(0.5);
+		pushSole.set(!pushSole.get());
+	}
+	
+	public boolean getPusherPosition() {
+		return pushSole.get();
 	}
 	
 	public void switchShooterPosition(){

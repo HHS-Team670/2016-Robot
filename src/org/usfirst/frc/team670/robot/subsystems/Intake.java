@@ -16,9 +16,17 @@ public class Intake extends Subsystem {
 		intakeSole = new Solenoid(2);
 	}
 	
+	public void setIntakePosition(boolean boo) {
+		intakeSole.set(boo);
+	}
+	
 	public boolean getIntakePosition() {
 		return intakeSole.get();
 		}
+	
+	public double getIntakeSpeed() {
+		return intakeTalon.get();
+	}
 	
 	public void spinIntake () {
 		intakeTalon.set(0.75);

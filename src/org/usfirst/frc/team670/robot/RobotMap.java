@@ -14,6 +14,6 @@ public class RobotMap {
     public static int operatorStick = 0;
     public static int leftDriveStick = 1;
     public static int rightDriveStick = 2;
-    public static int arcButtons = 4;
+    public static int arcButtons = 3;
     
 }
