@@ -9,12 +9,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Shoot extends Command {
 
-	private double time;
-	
-    public Shoot(double time) {
-    	super(time);
+    public Shoot() {
         requires(Robot.shooter);
-        this.time = time;
     }
 
     // Called just before this Command runs the first time
@@ -23,17 +19,16 @@ public class Shoot extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooter.shoot(time);
+    	Robot.shooter.shoot();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return isTimedOut(); //WILL RETURN TRUE AFTER PUSHER RETURNS TO STARTING POSITION
+        return false; //WILL RETURN TRUE AFTER PUSHER RETURNS TO STARTING POSITION
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	
     }
 
     // Called when another command which requires one or more of the same

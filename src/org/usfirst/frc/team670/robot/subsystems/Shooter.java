@@ -21,30 +21,22 @@ public class Shooter extends Subsystem {
 		accelTimer = new Timer();
 		pushSole = new Solenoid(1);
 		shooterSole = new Solenoid(0);
-		
 	}
 
 	public void spin(double operator){
 		shooterTalon.set(operator);
 	}
 	
-	
-	
-	public void shoot(double time){
-		
+	public void shoot(){
 		accelTimer.start();
 		
-		while(accelTimer.get() < time){
-			if(accelTimer.get() <= .5)
-				shooterTalon.set(0.25);
-			else if(accelTimer.get() <= 1)
-				shooterTalon.set(0.5);
-			else if(accelTimer.get() <= 1.5)
-				shooterTalon.set(0.75);
-			else
-				shooterTalon.set(1);
-		}
-		shooterTalon.set(0);
+		if(accelTimer.get() <= .5)
+			shooterTalon.set(0.25);
+		if(accelTimer.get() <= 1)
+			shooterTalon.set(0.5);
+		if(accelTimer.get() <= 1.5)
+			shooterTalon.set(0.75);
+		shooterTalon.set(1);		
 	}
 	
 	public void switchPusherPosition(){
@@ -52,12 +44,7 @@ public class Shooter extends Subsystem {
 	}
 	
 	public void switchShooterPosition(){
-		
 		shooterSole.set(!shooterSole.get());
-	}
-	
-	public boolean isDown(){
-		return !shooterSole.get();
 	}
 	
     public void initDefaultCommand() {

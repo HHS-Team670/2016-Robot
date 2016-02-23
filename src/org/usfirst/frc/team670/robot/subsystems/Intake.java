@@ -16,9 +16,7 @@ public class Intake extends Subsystem {
 		intakeSole = new Solenoid(2);
 	}
 	
-	// Put methods for controlling this subsystem
-    // here. Call these from Commands.
-	public void spinIntake() {
+	public void spinIntake () {
 		intakeTalon.set(0.75);
 	}
 	
@@ -28,13 +26,10 @@ public class Intake extends Subsystem {
 
 	public void switchPosition() {
 		intakeSole.set(!intakeSole.get());
-		
-	}	    
-	
-	public boolean isDown() {
-		return intakeSole.get();
-	}
-	
+	}	
+    // Put methods for controlling this subsystem
+    // here. Call these from Commands.
+
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
