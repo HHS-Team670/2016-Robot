@@ -16,10 +16,4 @@ public class ShootingPosition extends CommandGroup {
 		 requires(Robot.intake);
 		 requires(Robot.shooter);
 	}
-	
-	public void end() {
-		new Shoot();
-	}
-	
-
 }
