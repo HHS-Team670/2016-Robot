@@ -6,6 +6,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutoIntake extends CommandGroup {
 		public AutoIntake() {
+			if(Robot.shooter.getPusherPosition() == true){
+				addSequential(new SwitchPusher());
+			}
+			
 			//Robot into intake position
 			addSequential(new IntakeLowBarPosition(), 1);
 			
@@ -14,7 +18,7 @@ public class AutoIntake extends CommandGroup {
 			//spins intake for 2 seconds
 			addSequential(new SpinIntake(), 10);
 			
-			if(Robot.intake.getIntakeSpeed() > 0){
+			if(Robot.intake.getIntakeSpeed() < 0){
 				Robot.shooter.setShooter(-0.25);
 			}
 			

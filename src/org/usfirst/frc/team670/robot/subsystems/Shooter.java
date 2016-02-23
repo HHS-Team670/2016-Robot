@@ -50,7 +50,8 @@ public class Shooter extends Subsystem {
 	
 	public void switchPusherPosition(){
 		pushSole.set(!pushSole.get());
-		pusherChecker++;
+		Timer.delay(0.5);
+		pushSole.set(!pushSole.get());
 	}
 	
 	public boolean getPusherPosition() {

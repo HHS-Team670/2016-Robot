@@ -11,7 +11,7 @@ public class AutoShoot extends CommandGroup {
 		if(Robot.shooter.getPusherPosition() == true){
 			addSequential(new SwitchPusher());}
 		
-		addSequential(new Shoot(),3);
+		addSequential(new Shoot(),5);
 		
 		addSequential(new SwitchPusher(),4);
 		

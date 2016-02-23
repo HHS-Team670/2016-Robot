@@ -6,20 +6,17 @@ public class ShootingPosition extends CommandGroup {
 	public ShootingPosition() {
 		
 		//intake down
-		if(Robot.intake.getIntakePosition() == true){
+		if(Robot.intake.getIntakePosition() == false){
 			addSequential(new MoveIntake(), 1);
 		}
 		//shooter up
-		if(Robot.shooter.getShooterPosition() == false ){
+		if(Robot.shooter.getShooterPosition() == false){
 			addSequential(new SwitchShooter());
 		}
 		 requires(Robot.intake);
 		 requires(Robot.shooter);
 	}
 	
-	public void end() {
-		new Shoot();
-	}
 	
 
 }
