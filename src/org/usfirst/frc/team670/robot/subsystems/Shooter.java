@@ -28,6 +28,10 @@ public class Shooter extends Subsystem {
 		shooterTalon.set(operator);
 	}
 	
+	public double getAccelTimer() {
+		return accelTimer.get();
+	}
+	
 	public void shoot(){
 		accelTimer.start();
 		
@@ -40,9 +44,17 @@ public class Shooter extends Subsystem {
 			shooterTalon.set(1);
 	}
 	
+	public void setShooter(double speed) {
+		shooterTalon.set(speed);
+	}
+	
 	public void switchPusherPosition(){
 		pushSole.set(!pushSole.get());
 		pusherChecker++;
+	}
+	
+	public boolean getPusherPosition() {
+		return pushSole.get();
 	}
 	
 	public void switchShooterPosition(){

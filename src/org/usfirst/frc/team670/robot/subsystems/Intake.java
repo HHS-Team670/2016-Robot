@@ -20,6 +20,11 @@ public class Intake extends Subsystem {
 		return intakeSole.get();
 		}
 	
+	public double getIntakeSpeed() {
+		return intakeTalon.get();
+	}
+	
+	
 	public void spinIntake () {
 		intakeTalon.set(0.75);
 	}
