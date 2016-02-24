@@ -38,10 +38,10 @@ public class Robot extends IterativeRobot {
 
 		SmartDashboard.putData(Scheduler.getInstance());
 	    
-	    autoChooser = new SendableChooser();
+	    autoChooser = new SendableChooser();//SENDABLE CHOOSER WRONG
+	    autoChooser.addObject("Drive Forwards", new MoveForward(12));
 	    autoChooser.addObject("Turn Right 90 Degrees", new Turn(90));
 	    autoChooser.addObject("Turn Left 90 Degrees", new Turn(-90));
-	    autoChooser.addObject("Drive Forwards", new MoveForward(12));
 	    SmartDashboard.putData("Autonomous Command Chooser", autoChooser);
 		intake = new Intake();
 		shooter = new Shooter();

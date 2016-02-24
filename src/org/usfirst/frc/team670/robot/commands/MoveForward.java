@@ -12,6 +12,7 @@ public class MoveForward extends Command {
 	private double distance;
 	
     public MoveForward(double distance) {
+    	System.out.println("in constructor");
     	requires(Robot.driveBase);
     }
 
@@ -21,6 +22,7 @@ public class MoveForward extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	System.out.println("in execute");
     	Robot.driveBase.driveDistanceInches(distance);
     }
 

@@ -49,6 +49,7 @@ public class DriveBase extends Subsystem {
     
     public void driveDistanceInches(double inches){
     	double numTicks = (inches/inchesPerTick) * 4;
+    	//2520 per revolution
 		
 		leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
 		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
@@ -62,12 +63,12 @@ public class DriveBase extends Subsystem {
 		rightTalon1.reverseSensor(true);
 		//rightTalon1.setAllowableClosedLoopErr(0);
 		//CAN CHANGE PID VALUES IN ROBORIO WEBDASHBOARD
-		double p = 0.1;
-		double i = 0;
+		double p = 25.6;
+		double i = 0.1;
 		double d = 0;
 		double f = 0;
 		int izone = 0;
-		double closeLoopRampRate = 0;
+		double closeLoopRampRate = 36;
 		int profile = 0;
 		
 		leftTalon1.setPID(p, i, d, f, izone, closeLoopRampRate, profile);
@@ -76,8 +77,10 @@ public class DriveBase extends Subsystem {
 		//leftTalon1.setPID(p, i, d);
 		//rightTalon1.setPID(p, i, d);
 		
-		leftTalon1.set(1440);
-		rightTalon1.set(1440);
+		System.out.println(p);
+		
+		leftTalon1.set(-2520);
+		rightTalon1.set(2520);
     }
 
     public void setSpeed(double speed){
