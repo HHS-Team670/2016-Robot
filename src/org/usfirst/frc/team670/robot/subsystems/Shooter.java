@@ -48,13 +48,9 @@ public class Shooter extends Subsystem {
 		shooterSole.set(boo);
 	}
 	
-	public void setPusherOut() {
-		pushSole.set(true);
-	}
-	
-	public void setPusherIn() {
-		pushSole.set(false);
-	}
+	public void setPusherPosition(boolean outOrIn) {
+		pushSole.set(outOrIn);
+		}
 	
 	public void switchPusherPosition(){
 		pushSole.set(!pushSole.get());
