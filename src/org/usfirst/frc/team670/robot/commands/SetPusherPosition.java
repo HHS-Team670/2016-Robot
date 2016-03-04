@@ -4,7 +4,11 @@ import org.usfirst.frc.team670.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class MovePusherOut extends Command {
+public class SetPusherPosition extends Command{
+	private boolean pos;
+	public SetPusherPosition(boolean pos){
+		requires(Robot.shooter);
+	}
 
 	@Override
 	protected void initialize() {
@@ -15,13 +19,13 @@ public class MovePusherOut extends Command {
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
-		Robot.shooter.setPusherPosition(true);
+		Robot.shooter.setPusherPosition(pos);
 	}
 
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override

@@ -6,8 +6,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutoIntake extends CommandGroup {
 	public AutoIntake() {
+		
+		addParallel(new DriveWithJoystick());
+		
 		addParallel(new SpinIntake());
-		addParallel(new BackwardsShooter(),3);
+		addParallel(new ChangeShooterSpeed(-0.37),3);
 		
 		
 		requires(Robot.intake);

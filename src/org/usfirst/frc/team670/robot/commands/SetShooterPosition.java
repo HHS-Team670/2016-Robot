@@ -4,21 +4,22 @@ import org.usfirst.frc.team670.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class MoveShooterDown extends Command{
-	public MoveShooterDown() {
+public class SetShooterPosition extends Command{
+	private boolean pos;
+	public SetShooterPosition(boolean pos) {
 		requires(Robot.shooter);
 	}
 
 	@Override
 	protected void initialize() {
 		// TODO Auto-generated method stub
-		
+		Robot.shooter.setPusherPosition(false);
 	}
 
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
-		Robot.shooter.setShooterPosition(false);
+		Robot.shooter.setShooterPosition(pos);
 	}
 
 	@Override

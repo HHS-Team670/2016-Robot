@@ -1,28 +1,31 @@
-
 package org.usfirst.frc.team670.robot.commands;
 
 import org.usfirst.frc.team670.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SlowestShooterSpeed extends Command{
+public class SetIntakePosition extends Command{
+	private boolean pos;
+	public SetIntakePosition(boolean pos){
+		requires(Robot.intake);
+	}
 
 	@Override
 	protected void initialize() {
 		// TODO Auto-generated method stub
-		requires(Robot.shooter);
+		
 	}
 
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
-		Robot.shooter.setShooter(0.1);
+		Robot.intake.setIntakePosition(pos);
 	}
 
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
