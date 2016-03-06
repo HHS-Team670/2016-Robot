@@ -5,10 +5,10 @@ import org.usfirst.frc.team670.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ChangeShooterSpeed extends Command{
+public class RunShooter extends Command{
 	private double speed;
 	
-	public ChangeShooterSpeed (double speed){
+	public RunShooter (double speed){
 		requires(Robot.shooter);
 	}
 

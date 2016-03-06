@@ -1,7 +1,6 @@
 
 package org.usfirst.frc.team670.robot;
 
-import org.usfirst.frc.team670.robot.commands.Turn;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Intake;
 import org.usfirst.frc.team670.robot.subsystems.Shooter;
@@ -38,8 +37,6 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData(Scheduler.getInstance());
 	    
 	    autoChooser = new SendableChooser();
-	    autoChooser.addObject("Turn Right 90 Degrees", new Turn(90));
-	    autoChooser.addObject("Turn Left 90 Degrees", new Turn(-90));
 	    SmartDashboard.putData("Autonomous Command Chooser", autoChooser);
 		intake = new Intake();
 		shooter = new Shooter();

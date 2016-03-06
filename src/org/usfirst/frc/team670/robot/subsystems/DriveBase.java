@@ -2,7 +2,6 @@ package org.usfirst.frc.team670.robot.subsystems;
 
 import org.usfirst.frc.team670.robot.RobotMap;
 import org.usfirst.frc.team670.robot.commands.DriveWithJoystick;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -20,8 +19,6 @@ public class DriveBase extends Subsystem {
     public CANTalon rightTalon1;
     public CANTalon rightTalon2;
     
-    private ADXRS450_Gyro gyro;
-    
     public DriveBase(){
     	leftTalon1 = new CANTalon(RobotMap.leftMotor1);
     	leftTalon2 = new CANTalon(RobotMap.leftMotor2);
@@ -32,8 +29,6 @@ public class DriveBase extends Subsystem {
     	leftTalon2.set(RobotMap.leftMotor1);
     	rightTalon2.changeControlMode(CANTalon.TalonControlMode.Follower);
     	rightTalon2.set(RobotMap.rightMotor1);
-    	
-    	gyro = new ADXRS450_Gyro();
     }
 
     public void initDefaultCommand() {
@@ -71,26 +66,6 @@ public class DriveBase extends Subsystem {
 		
 		leftTalon1.set(1440);
 		rightTalon1.set(1440);
-    }
-   
-    public void turnLeft(double degrees, double startAngle){
-    	if(gyro.getAngle() < startAngle + degrees){
-    		//System.out.println(degrees + "    " + startAngle);
-    		//leftTalon1.set(1);
-    		//rightTalon1.set(0);
-    	}
-    }
-    
-    public void turnRight(double degrees, double startAngle){
-    	if(gyro.getAngle() < startAngle + degrees){
-    		System.out.println(degrees + "    " + startAngle);
-    		//leftTalon1.set(0);
-    		//rightTalon1.set(1);
-    	}
-    }
-    
-    public double getAngle(){
-    	return gyro.getAngle();
     }
     
     public void setSpeed(double speed){
