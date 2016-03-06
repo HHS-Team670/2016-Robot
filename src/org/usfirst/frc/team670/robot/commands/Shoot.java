@@ -15,16 +15,22 @@ public class Shoot extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.shooter.shoot();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooter.shoot();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false; //WILL RETURN TRUE AFTER PUSHER RETURNS TO STARTING POSITION
+    	if(Robot.shooter.getPusherChecker() == 2){
+    		Robot.shooter.setPusherChecker(0);
+    		return true; //WILL RETURN TRUE AFTER PUSHER RETURNS TO STARTING POSITION
+    	}
+    	else
+    		return false;
+    		
     }
 
     // Called once after isFinished returns true
