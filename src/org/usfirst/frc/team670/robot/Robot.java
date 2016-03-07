@@ -2,6 +2,9 @@
 package org.usfirst.frc.team670.robot;
 
 import org.usfirst.frc.team670.robot.commands.DriveDistance;
+import org.usfirst.frc.team670.robot.commands.LowBarShootAuto;
+import org.usfirst.frc.team670.robot.commands.MoveSpeed;
+import org.usfirst.frc.team670.robot.commands.SpyAuto;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Intake;
 import org.usfirst.frc.team670.robot.subsystems.Shooter;
@@ -37,8 +40,17 @@ public class Robot extends IterativeRobot {
 
 		SmartDashboard.putData(Scheduler.getInstance());
 		
-	    autoChooser = new SendableChooser();//SENDABLE CHOOSER WRONG
+	    autoChooser = new SendableChooser();//SENDABLE CHOOSER WRONG?
 	    autoChooser.addDefault("Drive Forwards", new DriveDistance(12));
+	    autoChooser.addObject("Spy Bot", new SpyAuto());
+	    autoChooser.addObject("Low Bar and Shoot", new LowBarShootAuto());
+	    autoChooser.addObject("Rough Terrain", new MoveSpeed(3, 3));
+	    autoChooser.addObject("Ramparts", new MoveSpeed(3, 3));
+	    autoChooser.addObject("Rock Wall", new MoveSpeed(3, 3));
+	    autoChooser.addObject("Moat", new MoveSpeed(3, 3));
+	    autoChooser.addObject("Low Bar", new MoveSpeed(3, 3));
+	    autoChooser.addObject("Spy Bot", new SpyAuto());
+	    autoChooser.addObject("Low Bar and Shoot", new LowBarShootAuto());
 	    SmartDashboard.putData("Autonomous Command Chooser", autoChooser);
 		intake = new Intake();
 		shooter = new Shooter();

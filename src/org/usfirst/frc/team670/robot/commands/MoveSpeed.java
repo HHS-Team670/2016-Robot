@@ -14,8 +14,10 @@ public class MoveSpeed extends Command {
 	private double time; //in seconds
 	private Timer runTime;
 
-    public MoveSpeed() {
+    public MoveSpeed(double speed, double time) {
     	requires(Robot.driveBase);
+    	this.speed = speed;
+    	this.time = time;
     }
 
     // Called just before this Command runs the first time
