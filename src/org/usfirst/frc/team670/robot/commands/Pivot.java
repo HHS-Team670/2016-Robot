@@ -5,15 +5,15 @@ import org.usfirst.frc.team670.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * drives forward a certain distance in inches
+ *
  */
-public class MoveForward extends Command {
+public class Pivot extends Command {
 
-	private double distance;
+	private double angle;
 	
-    public MoveForward(double distance) {
-    	System.out.println("in constructor");
-    	requires(Robot.driveBase);
+    public Pivot(double angle) {
+        requires(Robot.driveBase);
+        this.angle = angle;
     }
 
     // Called just before this Command runs the first time
@@ -22,18 +22,15 @@ public class MoveForward extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println("in execute");
-    	Robot.driveBase.driveDistanceInches(distance);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	
     }
 
     // Called when another command which requires one or more of the same

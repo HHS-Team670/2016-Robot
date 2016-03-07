@@ -1,15 +1,19 @@
 package org.usfirst.frc.team670.robot.commands;
 
+import org.usfirst.frc.team670.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * drives forward a certain distance in inches
  */
-public class PIDTurn extends Command {
+public class DriveDistance extends Command {
 
-    public PIDTurn() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+	private double distance;
+	
+    public DriveDistance(double distance) {
+    	System.out.println("in constructor");
+    	requires(Robot.driveBase);
     }
 
     // Called just before this Command runs the first time
@@ -18,15 +22,18 @@ public class PIDTurn extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	System.out.println("in execute");
+    	Robot.driveBase.driveDistanceInches(distance);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	
     }
 
     // Called when another command which requires one or more of the same
