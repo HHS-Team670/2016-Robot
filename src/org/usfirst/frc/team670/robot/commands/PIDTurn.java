@@ -1,21 +1,19 @@
 package org.usfirst.frc.team670.robot.commands;
 
-import org.usfirst.frc.team670.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class Shoot extends Command {
+public class PIDTurn extends Command {
 
-    public Shoot() {
-        requires(Robot.shooter);
+    public PIDTurn() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shooter.shoot();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -24,13 +22,7 @@ public class Shoot extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(Robot.shooter.getPusherChecker() == 2){
-    		Robot.shooter.setPusherChecker(0);
-    		return true; //WILL RETURN TRUE AFTER PUSHER RETURNS TO STARTING POSITION
-    	}
-    	else
-    		return false;
-    		
+        return false;
     }
 
     // Called once after isFinished returns true

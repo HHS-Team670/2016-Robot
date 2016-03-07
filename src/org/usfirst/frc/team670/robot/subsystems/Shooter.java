@@ -15,6 +15,7 @@ public class Shooter extends Subsystem {
 	private Timer accelTimer;
 	private Solenoid pushSole;
 	private Solenoid shooterSole;
+	private int pusherChecker;
 	
 	public Shooter(){
 		shooterTalon = new Talon(1);
@@ -30,25 +31,40 @@ public class Shooter extends Subsystem {
 	public void shoot(){
 		accelTimer.start();
 		
-		if(accelTimer.get() <= .5)
+		if(accelTimer.get() <= .5) 
 			shooterTalon.set(0.25);
-		if(accelTimer.get() <= 1)
+		if(accelTimer.get() <= 1) 
 			shooterTalon.set(0.5);
-		if(accelTimer.get() <= 1.5)
+		if(accelTimer.get() <= 1.5) 
 			shooterTalon.set(0.75);
-		shooterTalon.set(1);		
+			shooterTalon.set(1);
 	}
 	
 	public void switchPusherPosition(){
 		pushSole.set(!pushSole.get());
+		pusherChecker++;
 	}
 	
 	public void switchShooterPosition(){
 		shooterSole.set(!shooterSole.get());
 	}
 	
+	public int getPusherChecker(){
+		return pusherChecker;
+	}
+	
+	public void setPusherChecker(int newValue){
+		pusherChecker = newValue;
+	}
+	
+	public boolean getShooterPosition() {
+		return shooterSole.get();
+	}
+	
+	
     public void initDefaultCommand() {
         setDefaultCommand(new SpinWithJoystick());
     }
+
 }
 

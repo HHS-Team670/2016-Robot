@@ -5,36 +5,35 @@ import org.usfirst.frc.team670.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * drives forward a certain distance in inches
  */
-public class Shoot extends Command {
+public class MoveForward extends Command {
 
-    public Shoot() {
-        requires(Robot.shooter);
+	private double distance;
+	
+    public MoveForward(double distance) {
+    	System.out.println("in constructor");
+    	requires(Robot.driveBase);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shooter.shoot();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	System.out.println("in execute");
+    	Robot.driveBase.driveDistanceInches(distance);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(Robot.shooter.getPusherChecker() == 2){
-    		Robot.shooter.setPusherChecker(0);
-    		return true; //WILL RETURN TRUE AFTER PUSHER RETURNS TO STARTING POSITION
-    	}
-    	else
-    		return false;
-    		
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	
     }
 
     // Called when another command which requires one or more of the same

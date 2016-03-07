@@ -7,30 +7,39 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Shoot extends Command {
+public class Turn extends Command {
 
-    public Shoot() {
-        requires(Robot.shooter);
+	private double startAngle;
+	private double turnDegrees;
+	private boolean direction;
+	private boolean finished;
+	
+	
+    public Turn(double turnDegrees) {
+        requires(Robot.driveBase);
+        this.turnDegrees = turnDegrees;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shooter.shoot();
+    	startAngle = Robot.driveBase.getAngle();
+    	if(turnDegrees > 0)
+    		direction = true;
+    	else if(turnDegrees < 0)
+    		direction = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if(direction)
+    		finished = Robot.driveBase.turnRight(turnDegrees, startAngle);
+    	else if(!direction)
+    		finished = Robot.driveBase.turnLeft(turnDegrees, startAngle);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(Robot.shooter.getPusherChecker() == 2){
-    		Robot.shooter.setPusherChecker(0);
-    		return true; //WILL RETURN TRUE AFTER PUSHER RETURNS TO STARTING POSITION
-    	}
-    	else
-    		return false;
-    		
+        return finished;
     }
 
     // Called once after isFinished returns true
