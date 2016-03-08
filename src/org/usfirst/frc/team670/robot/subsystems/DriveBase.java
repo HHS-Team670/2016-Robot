@@ -103,11 +103,58 @@ public class DriveBase extends Subsystem {
     }
     
     public void pivot(double degrees){
-    	
+    	leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
+		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		leftTalon1.setEncPosition(0);
+		//leftTalon1.reverseSensor(true);
+		//leftTalon1.setAllowableClosedLoopErr(0);
+		
+		rightTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
+		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		rightTalon1.setEncPosition(0);
+		//rightTalon1.reverseSensor(true);
+		//rightTalon1.setAllowableClosedLoopErr(0);
+		
+		double p = .8;
+		double i = .0025;
+		double d = .8;
+		
+		leftTalon1.setCloseLoopRampRate(1);
+		leftTalon1.setPID(p, i, d);
+		rightTalon1.setCloseLoopRampRate(1);
+		rightTalon1.setPID(p, i, d);
+		
+		leftTalon1.set(2520 * (degrees/360));//HOW TO TRANSLATE WHEEL DISTANCE INTO DEGREES
+		rightTalon1.set(-2520 * (degrees/360));
     }
     
     public void turn(double leftDistance, double rightDistance){
+    	double numTicksLeft = ((leftDistance/inchesPerTick) * 2520) / 360;
+    	double numTicksRight = ((rightDistance/inchesPerTick) * 2520) / 360;
     	
+    	leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
+		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		leftTalon1.setEncPosition(0);
+		//leftTalon1.reverseSensor(true);
+		//leftTalon1.setAllowableClosedLoopErr(0);
+		
+		rightTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
+		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		rightTalon1.setEncPosition(0);
+		//rightTalon1.reverseSensor(true);
+		//rightTalon1.setAllowableClosedLoopErr(0);
+		
+		double p = .8;
+		double i = .0025;
+		double d = .8;
+		
+		leftTalon1.setCloseLoopRampRate(1);
+		leftTalon1.setPID(p, i, d);
+		rightTalon1.setCloseLoopRampRate(1);
+		rightTalon1.setPID(p, i, d);
+		
+		leftTalon1.set(numTicksLeft);
+		rightTalon1.set(numTicksRight);
     }
     
     }
