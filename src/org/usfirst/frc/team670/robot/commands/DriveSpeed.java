@@ -8,13 +8,13 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class MoveSpeed extends Command {
+public class DriveSpeed extends Command {
 	
 	private double speed;
 	private double time; //in seconds
 	private Timer runTime;
 
-    public MoveSpeed(double speed, double time) {
+    public DriveSpeed(double speed, double time) {
     	requires(Robot.driveBase);
     	this.speed = speed;
     	this.time = time;
