@@ -8,16 +8,16 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveSpeed extends Command {
-	
-	private double speed;
-	private double time; //in seconds
-	private Timer runTime;
+public class NoPIDDrive extends Command {
 
-    public DriveSpeed(double speed, double time) {
-    	requires(Robot.driveBase);
-    	this.speed = speed;
-    	this.time = time;
+	private double v;
+	private double time;
+	private Timer runTime;
+	
+    public NoPIDDrive(double v, double time) {
+        requires(Robot.driveBase);
+        this.v = v;
+        this.time = time;
     }
 
     // Called just before this Command runs the first time
@@ -28,12 +28,12 @@ public class DriveSpeed extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveBase.setSpeed(speed);
+    	Robot.driveBase.drive(v, v);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(runTime.get() >= time){
+        if(runTime.get() >= time){
     		return true;
     	}
         return false;
@@ -41,8 +41,8 @@ public class DriveSpeed extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	runTime.stop();
     	Robot.driveBase.drive(0, 0);
+    	runTime.stop();
     }
 
     // Called when another command which requires one or more of the same

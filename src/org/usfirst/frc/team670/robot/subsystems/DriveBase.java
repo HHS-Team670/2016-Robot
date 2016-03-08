@@ -14,6 +14,7 @@ public class DriveBase extends Subsystem {
 	public static final double diameterInInches = 9.75;
 	public static final double circumferenceInInches = diameterInInches * Math.PI;
 	public static final double inchesPerTick = circumferenceInInches/360;
+	public static final double pivotRadius = 0;//LENGTH FROM WHEELS TO CENTER OF CIRCLE
     public CANTalon leftTalon1;
     public CANTalon leftTalon2;
     public CANTalon rightTalon1;
@@ -48,7 +49,7 @@ public class DriveBase extends Subsystem {
     }
     
     public void driveDistanceInches(double inches){
-    	double numTicks = ((inches/inchesPerTick) * 2520) / 360;
+    	double numTicks = ((inches/inchesPerTick)/360) * 2520;
 		
 		leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
 		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
@@ -103,6 +104,10 @@ public class DriveBase extends Subsystem {
     }
     
     public void pivot(double degrees){
+    	double pivotCircumference = 2 * Math.PI * pivotRadius;
+    	double pivotArcLength = (degrees/360) * pivotCircumference;
+    	double numTicks = ((pivotArcLength/inchesPerTick)/360) * 2520;
+    	
     	leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
 		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		leftTalon1.setEncPosition(0);
@@ -124,13 +129,13 @@ public class DriveBase extends Subsystem {
 		rightTalon1.setCloseLoopRampRate(1);
 		rightTalon1.setPID(p, i, d);
 		
-		leftTalon1.set(2520 * (degrees/360));//HOW TO TRANSLATE WHEEL DISTANCE INTO DEGREES
-		rightTalon1.set(-2520 * (degrees/360));
+		leftTalon1.set(numTicks);
+		rightTalon1.set(-numTicks);
     }
     
     public void turn(double leftDistance, double rightDistance){
-    	double numTicksLeft = ((leftDistance/inchesPerTick) * 2520) / 360;
-    	double numTicksRight = ((rightDistance/inchesPerTick) * 2520) / 360;
+    	double numTicksLeft = ((leftDistance/inchesPerTick)/360) * 2520;
+    	double numTicksRight = ((rightDistance/inchesPerTick)/360) * 2520;
     	
     	leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
 		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
