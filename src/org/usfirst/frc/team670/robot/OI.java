@@ -8,7 +8,7 @@ import org.usfirst.frc.team670.robot.commands.MoveIntake;
 import org.usfirst.frc.team670.robot.commands.SpinIntake;
 import org.usfirst.frc.team670.robot.commands.Shoot;
 import org.usfirst.frc.team670.robot.commands.ShootingPosition;
-import org.usfirst.frc.team670.robot.commands.SwitchPusher;
+import org.usfirst.frc.team670.robot.commands.PushBall;
 import org.usfirst.frc.team670.robot.commands.SwitchShooter;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -39,7 +39,7 @@ public class OI {
 	public OI(){
 		intakeRollerButt.whileHeld(new SpinIntake());
 		intakePosButt.whenPressed(new MoveIntake());
-		hingePlateButt.whenPressed(new SwitchPusher());
+		hingePlateButt.whenPressed(new PushBall());
 		shooterPosButt.whenPressed(new SwitchShooter());
 		testShootButt.whenPressed(new Shoot());
 		shootingPosition.whenPressed(new ShootingPosition());

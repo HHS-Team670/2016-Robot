@@ -22,7 +22,7 @@ public class Intake extends Subsystem {
 	
 	public boolean getIntakePosition() {
 		return intakeSole.get();
-		}
+	}
 	
 	public double getIntakeSpeed() {
 		return intakeTalon.get();
@@ -39,16 +39,8 @@ public class Intake extends Subsystem {
 	public void switchPosition() {
 		intakeSole.set(!intakeSole.get());
 	}	
-	
-	public void setIntakeSole(boolean set){
-		intakeSole.set(set);
-	}
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
 
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     }
 }
 

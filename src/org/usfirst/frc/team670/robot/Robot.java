@@ -40,7 +40,6 @@ public class Robot extends IterativeRobot {
 		driveBase = new DriveBase();
 
 		SmartDashboard.putData(Scheduler.getInstance());
-		
 	    autoChooser = new SendableChooser();//SENDABLE CHOOSER WRONG?
 	    autoChooser.addDefault("Drive Forwards", new DriveDistance(12));
 	    autoChooser.addObject("Spy Bot", new SpyAuto());

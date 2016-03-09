@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class SwitchPusher extends Command {
+public class PushBall extends Command {
 
-    public SwitchPusher() {
+    public PushBall() {
         requires(Robot.shooter);
     }
 
@@ -19,7 +19,7 @@ public class SwitchPusher extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooter.switchPusherPosition();
+    	Robot.shooter.pushBall();
     }
 
     // Make this return true when this Command no longer needs to run execute()
