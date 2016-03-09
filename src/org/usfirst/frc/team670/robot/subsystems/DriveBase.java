@@ -14,7 +14,7 @@ public class DriveBase extends Subsystem {
 	public static final double diameterInInches = 9.75;
 	public static final double circumferenceInInches = diameterInInches * Math.PI;
 	public static final double inchesPerTick = circumferenceInInches/360;
-	public static final double pivotRadius = 0;//LENGTH FROM WHEELS TO CENTER OF CIRCLE
+	public static final double pivotRadius = 16;//LENGTH FROM WHEELS TO CENTER OF CIRCLE
     public CANTalon leftTalon1;
     public CANTalon leftTalon2;
     public CANTalon rightTalon1;

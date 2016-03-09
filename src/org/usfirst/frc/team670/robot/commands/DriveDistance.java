@@ -12,7 +12,6 @@ public class DriveDistance extends Command {
 	private double distance;
 	
     public DriveDistance(double distance) {
-    	System.out.println("in constructor");
     	requires(Robot.driveBase);
     }
 
@@ -22,7 +21,6 @@ public class DriveDistance extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println("in execute");
     	Robot.driveBase.driveDistanceInches(distance);
     }
 

@@ -3,6 +3,7 @@ package org.usfirst.frc.team670.robot;
 
 import org.usfirst.frc.team670.robot.commands.DriveDistance;
 import org.usfirst.frc.team670.robot.commands.LowBarShootAuto;
+import org.usfirst.frc.team670.robot.commands.NoPIDDrive;
 import org.usfirst.frc.team670.robot.commands.DriveSpeed;
 import org.usfirst.frc.team670.robot.commands.SpyAuto;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
@@ -49,8 +50,7 @@ public class Robot extends IterativeRobot {
 	    autoChooser.addObject("Rock Wall", new DriveSpeed(3, 3));
 	    autoChooser.addObject("Moat", new DriveSpeed(3, 3));
 	    autoChooser.addObject("Low Bar", new DriveSpeed(3, 3));
-	    autoChooser.addObject("Spy Bot", new SpyAuto());
-	    autoChooser.addObject("Low Bar and Shoot", new LowBarShootAuto());
+	    autoChooser.addObject("No PID", new NoPIDDrive(.75, 6));
 	    SmartDashboard.putData("Autonomous Command Chooser", autoChooser);
 		intake = new Intake();
 		shooter = new Shooter();
