@@ -9,6 +9,14 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import com.ni.vision.NIVision;
+import com.ni.vision.NIVision.DrawMode;
+import com.ni.vision.NIVision.Image;
+import com.ni.vision.NIVision.ShapeMode;
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.SampleRobot;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,6 +30,12 @@ public class Robot extends IterativeRobot {
 	public static DriveBase driveBase;
 	public static Intake intake;
 	public static Shooter shooter;
+	int session;
+	Image frame;
+	NIVision.RawData colorTable;
+	NetworkTable netTable;
+
+
 
     Command autonomousCommand;
     SendableChooser chooser;
@@ -35,6 +49,14 @@ public class Robot extends IterativeRobot {
 		intake = new Intake();
 		shooter = new Shooter();
 		oi = new OI();
+		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+		netTable = NetworkTable.getTable("camera");
+		// the camera name (ex "cam0") can be found through the roborio web
+		// interface
+		session = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+		NIVision.IMAQdxConfigureGrab(session);
+		colorTable = new NIVision.RawData();
+
     }
 	
 	/**
@@ -71,7 +93,38 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
     }
 
-    public void teleopInit() {
+    public void teleopInit(){
+    		NIVision.IMAQdxStartAcquisition(session);
+		/*
+		 * grab an image, draw the circle, and provide it for the camera server
+		 * which will in turn send it to the dashboard.
+		 */
+
+		while (isOperatorControl() && isEnabled()) {
+
+			int width = (int) netTable.getNumber("width", 10);
+			int height = (int) netTable.getNumber("height", 10);
+			int x = (int) netTable.getNumber("x", 10);
+			int y = (int) netTable.getNumber("y", 10);
+
+			System.out.println("Width: " + width + " Height: " + height + " X: " + x + " Y: " + y);
+			NIVision.Rect rect = new NIVision.Rect(x, y, width, height);
+			
+			
+			NIVision.IMAQdxGrab(session, frame, 1);
+
+			NIVision.imaqWriteJPEGFile(frame, "/images/vision.jpg", 100, colorTable);
+			NIVision.imaqDrawShapeOnImage(frame, frame, rect, DrawMode.PAINT_VALUE, ShapeMode.SHAPE_RECT, 0.0f);
+
+			CameraServer.getInstance().setImage(frame);
+
+			/** robot code here! **/
+			Timer.delay(0.005); // wait for a motor update time
+
+		}
+		NIVision.IMAQdxStopAcquisition(session);
+	}
+
 		// This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
