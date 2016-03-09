@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team670.robot;
 
+import org.usfirst.frc.team670.robot.commands.Turn;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Intake;
 import org.usfirst.frc.team670.robot.subsystems.Shooter;
@@ -9,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,8 +25,8 @@ public class Robot extends IterativeRobot {
 	public static Intake intake;
 	public static Shooter shooter;
 
-    Command autonomousCommand;
-    SendableChooser chooser;
+    Command autoCommand;
+    SendableChooser autoChooser;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -32,6 +34,13 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		driveBase = new DriveBase();
+
+		SmartDashboard.putData(Scheduler.getInstance());
+	    
+	    autoChooser = new SendableChooser();
+	    autoChooser.addObject("Turn Right 90 Degrees", new Turn(90));
+	    autoChooser.addObject("Turn Left 90 Degrees", new Turn(-90));
+	    SmartDashboard.putData("Autonomous Command Chooser", autoChooser);
 		intake = new Intake();
 		shooter = new Shooter();
 		oi = new OI();
@@ -60,8 +69,8 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
-        if (autonomousCommand != null) autonomousCommand.start();
+    	autoCommand = (Command) autoChooser.getSelected();
+        autoCommand.start();
     }
 
     /**
@@ -76,7 +85,8 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
+    	if (autoCommand != null) 
+        	autoCommand.cancel();
     }
 
     /**

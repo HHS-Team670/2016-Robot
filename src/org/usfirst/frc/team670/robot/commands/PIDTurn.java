@@ -1,16 +1,15 @@
 package org.usfirst.frc.team670.robot.commands;
 
-import org.usfirst.frc.team670.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class SpinWithJoystick extends Command {
+public class PIDTurn extends Command {
 
-    public SpinWithJoystick() {
-       requires(Robot.shooter);
+    public PIDTurn() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
@@ -19,7 +18,6 @@ public class SpinWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooter.setShooter(Robot.oi.getOperatorStick().getY());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -29,7 +27,6 @@ public class SpinWithJoystick extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shooter.setShooter(0);
     }
 
     // Called when another command which requires one or more of the same
