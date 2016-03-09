@@ -11,10 +11,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Subsystem for the drivebase containing things like the Talons
  */
 public class DriveBase extends Subsystem {
-	public static final double gearRatio = 10.71;
-	public static final double diameterInInches = 6;
+	public static final double diameterInInches = 9.75;
 	public static final double circumferenceInInches = diameterInInches * Math.PI;
 	public static final double inchesPerTick = circumferenceInInches/360;
+	public static final double pivotRadius = 16;//LENGTH FROM WHEELS TO CENTER OF CIRCLE
     public CANTalon leftTalon1;
     public CANTalon leftTalon2;
     public CANTalon rightTalon1;
@@ -49,64 +49,118 @@ public class DriveBase extends Subsystem {
     }
     
     public void driveDistanceInches(double inches){
-    	double numTicks = inches/inchesPerTick;
+    	double numTicks = ((inches/inchesPerTick)/360) * 2520;
 		
-		leftTalon1.setEncPosition(0);
 		leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
 		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		leftTalon1.reverseSensor(true);
-		leftTalon1.setF(0.25);
-		leftTalon1.setPID(0.3, 0, 0);
-		//leftTalon1.setCloseLoopRampRate(0);
-		//leftTalon1.setIZone(0);
+		leftTalon1.setEncPosition(0);
+		//leftTalon1.reverseSensor(true);
+		//leftTalon1.setAllowableClosedLoopErr(0);
 		
-		rightTalon1.setEncPosition(0);
 		rightTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
 		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		rightTalon1.reverseSensor(true);
-		rightTalon1.setF(0.25);
-		rightTalon1.setPID(0.3, 0, 0);
-		//rightTalon1.setCloseLoopRampRate(0);
-		//rightTalon1.setIZone(0);
+		rightTalon1.setEncPosition(0);
+		//rightTalon1.reverseSensor(true);
+		//rightTalon1.setAllowableClosedLoopErr(0);
 		
-		leftTalon1.set(1440);
-		rightTalon1.set(1440);
-    }
-   
-    public void turnLeft(double degrees, double startAngle){
-    	if(gyro.getAngle() < startAngle + degrees){
-    		//System.out.println(degrees + "    " + startAngle);
-    		//leftTalon1.set(1);
-    		//rightTalon1.set(0);
-    	}
-    }
-    
-    public void turnRight(double degrees, double startAngle){
-    	if(gyro.getAngle() < startAngle + degrees){
-    		System.out.println(degrees + "    " + startAngle);
-    		//leftTalon1.set(0);
-    		//rightTalon1.set(1);
-    	}
-    }
-    
-    public double getAngle(){
-    	return gyro.getAngle();
+		double p = .8;
+		double i = .0025;
+		double d = .8;
+		
+		leftTalon1.setCloseLoopRampRate(1);
+		leftTalon1.setPID(p, i, d);
+		rightTalon1.setCloseLoopRampRate(1);
+		rightTalon1.setPID(p, i, d);
+		
+		leftTalon1.set(2520);
+		rightTalon1.set(2520);
     }
     
     public void setSpeed(double speed){
-    	leftTalon1.changeControlMode(CANTalon.TalonControlMode.Speed);
-    	leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-    	leftTalon1.reverseSensor(true);
-    	leftTalon1.setF(0.25);
-		leftTalon1.setPID(0.3, 0, 0);
-		leftTalon1.set(48);
-    	
-    	rightTalon1.changeControlMode(CANTalon.TalonControlMode.Speed);
-    	rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-    	rightTalon1.reverseSensor(true);
-    	rightTalon1.setF(0.25);
-		rightTalon1.setPID(0.3, 0, 0);
-		rightTalon1.set(48);
+		
+		leftTalon1.changeControlMode(CANTalon.TalonControlMode.Speed);
+		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		leftTalon1.setEncPosition(0);
+		//leftTalon1.reverseSensor(true);
+		//leftTalon1.setAllowableClosedLoopErr(0);
+		
+		rightTalon1.changeControlMode(CANTalon.TalonControlMode.Speed);
+		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		rightTalon1.setEncPosition(0);
+		//rightTalon1.reverseSensor(true);
+		//rightTalon1.setAllowableClosedLoopErr(0);
+		
+		double p = .8;
+		double i = .0025;
+		double d = .8;
+		
+		leftTalon1.setCloseLoopRampRate(1);
+		leftTalon1.setPID(p, i, d);
+		rightTalon1.setCloseLoopRampRate(1);
+		rightTalon1.setPID(p, i, d);
+		
+		leftTalon1.set(10);
+		rightTalon1.set(10);
     }
-}
+    
+    public void pivot(double degrees){
+    	double pivotCircumference = 2 * Math.PI * pivotRadius;
+    	double pivotArcLength = (degrees/360) * pivotCircumference;
+    	double numTicks = ((pivotArcLength/inchesPerTick)/360) * 2520;
+    	
+    	leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
+		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		leftTalon1.setEncPosition(0);
+		//leftTalon1.reverseSensor(true);
+		//leftTalon1.setAllowableClosedLoopErr(0);
+		
+		rightTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
+		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		rightTalon1.setEncPosition(0);
+		//rightTalon1.reverseSensor(true);
+		//rightTalon1.setAllowableClosedLoopErr(0);
+		
+		double p = .8;
+		double i = .0025;
+		double d = .8;
+		
+		leftTalon1.setCloseLoopRampRate(1);
+		leftTalon1.setPID(p, i, d);
+		rightTalon1.setCloseLoopRampRate(1);
+		rightTalon1.setPID(p, i, d);
+		
+		leftTalon1.set(numTicks);
+		rightTalon1.set(-numTicks);
+    }
+    
+    public void turn(double leftDistance, double rightDistance){
+    	double numTicksLeft = ((leftDistance/inchesPerTick)/360) * 2520;
+    	double numTicksRight = ((rightDistance/inchesPerTick)/360) * 2520;
+    	
+    	leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
+		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		leftTalon1.setEncPosition(0);
+		//leftTalon1.reverseSensor(true);
+		//leftTalon1.setAllowableClosedLoopErr(0);
+		
+		rightTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
+		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		rightTalon1.setEncPosition(0);
+		//rightTalon1.reverseSensor(true);
+		//rightTalon1.setAllowableClosedLoopErr(0);
+		
+		double p = .8;
+		double i = .0025;
+		double d = .8;
+		
+		leftTalon1.setCloseLoopRampRate(1);
+		leftTalon1.setPID(p, i, d);
+		rightTalon1.setCloseLoopRampRate(1);
+		rightTalon1.setPID(p, i, d);
+		
+		leftTalon1.set(numTicksLeft);
+		rightTalon1.set(numTicksRight);
+    }
+    
+    }
 

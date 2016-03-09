@@ -1,7 +1,11 @@
 
 package org.usfirst.frc.team670.robot;
 
-import org.usfirst.frc.team670.robot.commands.Turn;
+import org.usfirst.frc.team670.robot.commands.DriveDistance;
+import org.usfirst.frc.team670.robot.commands.LowBarShootAuto;
+import org.usfirst.frc.team670.robot.commands.NoPIDDrive;
+import org.usfirst.frc.team670.robot.commands.DriveSpeed;
+import org.usfirst.frc.team670.robot.commands.SpyAuto;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Intake;
 import org.usfirst.frc.team670.robot.subsystems.Shooter;
@@ -36,10 +40,17 @@ public class Robot extends IterativeRobot {
 		driveBase = new DriveBase();
 
 		SmartDashboard.putData(Scheduler.getInstance());
-	    
-	    autoChooser = new SendableChooser();
-	    autoChooser.addObject("Turn Right 90 Degrees", new Turn(90));
-	    autoChooser.addObject("Turn Left 90 Degrees", new Turn(-90));
+		
+	    autoChooser = new SendableChooser();//SENDABLE CHOOSER WRONG?
+	    autoChooser.addDefault("Drive Forwards", new DriveDistance(12));
+	    autoChooser.addObject("Spy Bot", new SpyAuto());
+	    autoChooser.addObject("Low Bar and Shoot", new LowBarShootAuto());
+	    autoChooser.addObject("Rough Terrain", new DriveSpeed(3, 3));
+	    autoChooser.addObject("Ramparts", new DriveSpeed(3, 3));
+	    autoChooser.addObject("Rock Wall", new DriveSpeed(3, 3));
+	    autoChooser.addObject("Moat", new DriveSpeed(3, 3));
+	    autoChooser.addObject("Low Bar", new DriveSpeed(3, 3));
+	    autoChooser.addObject("No PID", new NoPIDDrive(.75, 6));
 	    SmartDashboard.putData("Autonomous Command Chooser", autoChooser);
 		intake = new Intake();
 		shooter = new Shooter();

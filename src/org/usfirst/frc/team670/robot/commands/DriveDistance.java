@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * drives forward a certain distance in inches
  */
-public class MoveForward extends Command {
+public class DriveDistance extends Command {
 
 	private double distance;
 	
-    public MoveForward(double distance) {
+    public DriveDistance(double distance) {
     	requires(Robot.driveBase);
     }
 
