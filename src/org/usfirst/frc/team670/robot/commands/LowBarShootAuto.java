@@ -12,6 +12,6 @@ public class LowBarShootAuto extends CommandGroup {
     	addSequential(new DriveDistance(3));//drive to be aligned with goal
     	addSequential(new Pivot(45));//pivot to face goal
     	addSequential(new DriveDistance(3));//drive to shooting distance
-    	//addSequential(new autoShoot());//shoot ball
+    	addSequential(new AutoShoot());//shoot ball
     }
 }

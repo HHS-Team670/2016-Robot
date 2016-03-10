@@ -35,12 +35,11 @@ public class Robot extends IterativeRobot {
 	public static DriveBase driveBase;
 	public static Intake intake;
 	public static Shooter shooter;
+	
 	int session;
 	Image frame;
 	NIVision.RawData colorTable;
 	NetworkTable netTable;
-
-
 
     Command autoCommand;
     SendableChooser autoChooser;
@@ -50,8 +49,6 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-		driveBase = new DriveBase();
-
 		SmartDashboard.putData(Scheduler.getInstance());
 	    autoChooser = new SendableChooser();//SENDABLE CHOOSER WRONG?
 	    autoChooser.addDefault("Drive Forwards", new DriveDistance(12));
@@ -64,9 +61,11 @@ public class Robot extends IterativeRobot {
 	    autoChooser.addObject("Low Bar", new DriveSpeed(3, 3));
 	    autoChooser.addObject("No PID", new NoPIDDrive(.75, 6));
 	    SmartDashboard.putData("Autonomous Command Chooser", autoChooser);
+		driveBase = new DriveBase();
 		intake = new Intake();
 		shooter = new Shooter();
 		oi = new OI();
+		
 		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 		netTable = NetworkTable.getTable("camera");
 		// the camera name (ex "cam0") can be found through the roborio web
@@ -116,7 +115,7 @@ public class Robot extends IterativeRobot {
     	if (autoCommand != null) 
         	autoCommand.cancel();
     	
-    		NIVision.IMAQdxStartAcquisition(session);
+    	NIVision.IMAQdxStartAcquisition(session);
 		/*
 		 * grab an image, draw the circle, and provide it for the camera server
 		 * which will in turn send it to the dashboard.
@@ -132,17 +131,13 @@ public class Robot extends IterativeRobot {
 			System.out.println("Width: " + width + " Height: " + height + " X: " + x + " Y: " + y);
 			NIVision.Rect rect = new NIVision.Rect(x, y, width, height);
 			
-			
 			NIVision.IMAQdxGrab(session, frame, 1);
 
 			NIVision.imaqWriteJPEGFile(frame, "/images/vision.jpg", 100, colorTable);
 			NIVision.imaqDrawShapeOnImage(frame, frame, rect, DrawMode.PAINT_VALUE, ShapeMode.SHAPE_RECT, 0.0f);
 
 			CameraServer.getInstance().setImage(frame);
-
-			/** robot code here! **/
 			Timer.delay(0.005); // wait for a motor update time
-
 		}
 		NIVision.IMAQdxStopAcquisition(session);
     }

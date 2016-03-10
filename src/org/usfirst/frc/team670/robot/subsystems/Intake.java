@@ -16,8 +16,8 @@ public class Intake extends Subsystem {
 		intakeSole = new Solenoid(2);
 	}
 	
-	public void setIntakePosition(boolean boo) {
-		intakeSole.set(boo);
+	public void setIntakePosition(boolean pos) {
+		intakeSole.set(pos);
 	}
 	
 	public boolean getIntakePosition() {

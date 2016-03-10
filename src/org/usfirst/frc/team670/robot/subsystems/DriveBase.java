@@ -62,9 +62,9 @@ public class DriveBase extends Subsystem {
 		double i = .0025;
 		double d = .8;
 		
-		leftTalon1.setCloseLoopRampRate(1);
+		//leftTalon1.setCloseLoopRampRate(1);
 		leftTalon1.setPID(p, i, d);
-		rightTalon1.setCloseLoopRampRate(1);
+		//rightTalon1.setCloseLoopRampRate(1);
 		rightTalon1.setPID(p, i, d);
 		
 		leftTalon1.set(2520);
@@ -89,9 +89,9 @@ public class DriveBase extends Subsystem {
 		double i = .0025;
 		double d = .8;
 		
-		leftTalon1.setCloseLoopRampRate(1);
+		//leftTalon1.setCloseLoopRampRate(1);
 		leftTalon1.setPID(p, i, d);
-		rightTalon1.setCloseLoopRampRate(1);
+		//rightTalon1.setCloseLoopRampRate(1);
 		rightTalon1.setPID(p, i, d);
 		
 		leftTalon1.set(10);
@@ -119,9 +119,9 @@ public class DriveBase extends Subsystem {
 		double i = .0025;
 		double d = .8;
 		
-		leftTalon1.setCloseLoopRampRate(1);
+		//leftTalon1.setCloseLoopRampRate(1);
 		leftTalon1.setPID(p, i, d);
-		rightTalon1.setCloseLoopRampRate(1);
+		//rightTalon1.setCloseLoopRampRate(1);
 		rightTalon1.setPID(p, i, d);
 		
 		leftTalon1.set(numTicks);
@@ -156,6 +156,5 @@ public class DriveBase extends Subsystem {
 		leftTalon1.set(numTicksLeft);
 		rightTalon1.set(numTicksRight);
     }
-    
-    }
+}
 
