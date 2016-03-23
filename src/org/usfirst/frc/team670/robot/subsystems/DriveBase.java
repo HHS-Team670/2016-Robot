@@ -35,6 +35,7 @@ public class DriveBase extends Subsystem {
 
     public void initDefaultCommand() {
     	setDefaultCommand(new DriveWithJoystick());
+    	System.out.println("set default command");
     }
     
     public void drive(double left, double right){
@@ -43,6 +44,7 @@ public class DriveBase extends Subsystem {
     	
     	leftTalon1.set(left);
     	rightTalon1.set(right);
+    	System.out.println("drive method");
     }
     
     public void driveDistanceInches(double inches){
@@ -76,6 +78,8 @@ public class DriveBase extends Subsystem {
 		
 		leftTalon1.set(2520);
 		rightTalon1.set(2520);
+		
+		System.out.println("end of driveDistance method");
     }
     
     public void setSpeed(double speed){

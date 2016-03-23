@@ -77,7 +77,7 @@ public class Robot extends IterativeRobot {
 		autoChooser.addObject("No PID", new NoPIDDrive(.75, 6));
 		*/
 		SmartDashboard.putData("Autonomous Command Chooser", autoChooser);
-
+		/*
 		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 		netTable = NetworkTable.getTable("camera");
 		// the camera name (ex "cam0") can be found through the roborio web interface
@@ -85,6 +85,7 @@ public class Robot extends IterativeRobot {
 		NIVision.IMAQdxConfigureGrab(session);
 		colorTable = new NIVision.RawData();
 		System.out.println((Command) autoChooser.getSelected());
+		*/
 	}
 
 	/**
@@ -162,11 +163,11 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during operator control
 	 */
 	public void teleopPeriodic() {
-		
+		/*
 		Scheduler.getInstance().run();
 		CaptureImage();
 		//NIVision.imaqWriteJPEGFile(frame, "/images/vision.jpg", 100, colorTable);
-		
+		*/
 		
 	}
 
