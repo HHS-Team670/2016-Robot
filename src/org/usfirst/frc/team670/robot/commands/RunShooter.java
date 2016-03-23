@@ -10,6 +10,7 @@ public class RunShooter extends Command{
 	
 	public RunShooter (double speed){
 		requires(Robot.shooter);
+		this.speed = speed;
 	}
 
 	@Override
@@ -28,7 +29,7 @@ public class RunShooter extends Command{
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 
 	@Override

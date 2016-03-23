@@ -8,12 +8,13 @@ public class SetShooterPosition extends Command{
 	private boolean pos;
 	public SetShooterPosition(boolean pos) {
 		requires(Robot.shooter);
+		this.pos = pos;
 	}
 
 	@Override
 	protected void initialize() {
 		// TODO Auto-generated method stub
-		Robot.shooter.setPusherPosition(false);
+		//Robot.shooter.setPusherPosition(false);
 	}
 
 	@Override

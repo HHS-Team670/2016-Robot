@@ -13,6 +13,7 @@ public class DriveDistance extends Command {
 	
     public DriveDistance(double distance) {
     	requires(Robot.driveBase);
+    	this.distance = distance;
     }
 
     // Called just before this Command runs the first time

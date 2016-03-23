@@ -3,6 +3,7 @@ package org.usfirst.frc.team670.robot.subsystems;
 import org.usfirst.frc.team670.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team670.robot.commands.SpinWithJoystick;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
@@ -16,24 +17,22 @@ public class Shooter extends Subsystem {
 	private Timer accelTimer;
 	private Solenoid pushSole;
 	private Solenoid shooterSole;
+	private DigitalInput limit;
 	
 	public Shooter(){
 		shooterTalon = new Talon(1);
 		accelTimer = new Timer();
 		pushSole = new Solenoid(1);
 		shooterSole = new Solenoid(0);
+		limit = new DigitalInput(0);
+	}
+	
+	public boolean getLimitPosition() {
+		return limit.get();
 	}
 	
 	public void shoot(){
-		accelTimer.start();
-		
-		if(accelTimer.get() <= .5) 
-			shooterTalon.set(0.25);
-		if(accelTimer.get() <= 1) 
-			shooterTalon.set(0.5);
-		if(accelTimer.get() <= 1.5) 
-			shooterTalon.set(0.75);
-			shooterTalon.set(1);
+		shooterTalon.set(1);
 	}
 	
 	public void setShooter(double speed) {
@@ -46,7 +45,7 @@ public class Shooter extends Subsystem {
 	
 	public void setPusherPosition(boolean pos) {
 		pushSole.set(pos);
-		}
+	}
 	
 	public void pushBall(){
 		pushSole.set(!pushSole.get());
@@ -60,6 +59,10 @@ public class Shooter extends Subsystem {
 	
 	public void switchShooterPosition(){
 		shooterSole.set(!shooterSole.get());
+	}
+	
+	public void switchPusherPosition(){
+		pushSole.set(!pushSole.get());
 	}
 	
 	public boolean getShooterPosition() {

@@ -7,7 +7,7 @@ public class IntakeLowBarPosition extends CommandGroup{
 		//robot can still drive while changing positions
 		addParallel(new DriveWithJoystick(), 3);		
 		// trying to get intake down, shooter down
-		addSequential(new SetIntakePosition(false));
+		addSequential(new SetIntakePosition(true));
 		addSequential(new SetShooterPosition(false));
 	}
 

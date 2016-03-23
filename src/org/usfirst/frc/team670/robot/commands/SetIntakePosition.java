@@ -8,6 +8,7 @@ public class SetIntakePosition extends Command{
 	private boolean pos;
 	public SetIntakePosition(boolean pos){
 		requires(Robot.intake);
+		this.pos = pos;
 	}
 
 	@Override

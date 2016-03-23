@@ -8,6 +8,7 @@ public class SetPusherPosition extends Command{
 	private boolean pos;
 	public SetPusherPosition(boolean pos){
 		requires(Robot.shooter);
+		this.pos = pos;
 	}
 
 	@Override
