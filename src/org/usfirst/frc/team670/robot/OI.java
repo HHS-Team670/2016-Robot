@@ -7,12 +7,14 @@ import org.usfirst.frc.team670.robot.commands.DrivingPosition;
 import org.usfirst.frc.team670.robot.commands.IntakeLowBarPosition;
 import org.usfirst.frc.team670.robot.commands.ManualSpinIntake;
 import org.usfirst.frc.team670.robot.commands.MoveIntake;
+import org.usfirst.frc.team670.robot.commands.PositionDrive;
 import org.usfirst.frc.team670.robot.commands.SpinIntake;
 import org.usfirst.frc.team670.robot.commands.Shoot;
 import org.usfirst.frc.team670.robot.commands.ShootingPosition;
 import org.usfirst.frc.team670.robot.commands.PushBall;
 import org.usfirst.frc.team670.robot.commands.SwitchPusher;
 import org.usfirst.frc.team670.robot.commands.SwitchShooter;
+import org.usfirst.frc.team670.robot.commands.SwitchTriggers;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -42,7 +44,16 @@ public class OI {
 	
 	private Button cancel = new JoystickButton(operatorStick, 1);
 	
+	private Button startPosDriveModeButt = new JoystickButton(rightDriveStick, 3);
+	private Button endPosDriveModeButt = new JoystickButton(rightDriveStick, 2);
+	private Button startPosDriveButt = new JoystickButton(rightDriveStick, 1);
+	
 	public OI(){
+		
+		startPosDriveModeButt.whenPressed(new PositionDrive(false));
+		endPosDriveModeButt.whenPressed(new CancelCommand());
+		startPosDriveButt.whileHeld(new PositionDrive(true));
+		
 		drivingPosition.whenPressed(new DrivingPosition());
 		drivingPosition2.whenPressed(new DrivingPosition());
 		intakePosButt.whenPressed(new MoveIntake());

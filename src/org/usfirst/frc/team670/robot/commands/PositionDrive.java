@@ -5,15 +5,15 @@ import org.usfirst.frc.team670.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * drives forward a certain distance in inches
+ *
  */
-public class DriveDistance extends Command {
+public class PositionDrive extends Command {
 
-	private double distance;
+	private boolean triggers;
 	
-    public DriveDistance(double distance) {
+    public PositionDrive(boolean triggers) {
     	requires(Robot.driveBase);
-    	this.distance = distance;
+    	this.triggers = triggers;
     }
 
     // Called just before this Command runs the first time
@@ -22,19 +22,17 @@ public class DriveDistance extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveBase.driveDistanceInches(distance);
-    	System.out.println("DriveDistance execute");
+    	if(triggers)
+    		Robot.driveBase.posDrive(Robot.oi.getleftStick().getY(), -Robot.oi.getrightStick().getY());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("DriveDistance end");
-    	
     }
 
     // Called when another command which requires one or more of the same
