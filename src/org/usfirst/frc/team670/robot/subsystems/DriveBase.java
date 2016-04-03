@@ -50,7 +50,7 @@ public class DriveBase extends Subsystem {
 		rightTalon1.setEncPosition(0);
 	}
 
-	public void posDrive(double left, double right) {
+	public void posDrive(double left, double right) {//Separate change control mode method??
 		// if (triggers) {
 		leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
 		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
@@ -67,6 +67,7 @@ public class DriveBase extends Subsystem {
 		leftTalon1.setPID(p, i, d);
 		rightTalon1.setPID(p, i, d);
 
+		System.out.println("Left: " + left + "Right: " + right);
 		leftTalon1.set(2520 * left);
 		rightTalon1.set(2520 * right);
 		//}

@@ -52,7 +52,8 @@ public class OI {
 		
 		startPosDriveModeButt.whenPressed(new PositionDrive(false));
 		endPosDriveModeButt.whenPressed(new CancelCommand());
-		startPosDriveButt.whileHeld(new PositionDrive(true));
+		startPosDriveButt.whenPressed(new PositionDrive(true));//whileHeld??
+		startPosDriveButt.whenReleased(new CancelCommand());
 		
 		drivingPosition.whenPressed(new DrivingPosition());
 		drivingPosition2.whenPressed(new DrivingPosition());
