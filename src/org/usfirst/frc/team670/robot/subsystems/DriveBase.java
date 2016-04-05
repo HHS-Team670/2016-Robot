@@ -22,7 +22,7 @@ public class DriveBase extends Subsystem {
 	public CANTalon rightTalon1;
 	public CANTalon rightTalon2;
 
-	private boolean triggers;
+	private boolean noDrive;
 
 	public DriveBase() {
 		leftTalon1 = new CANTalon(RobotMap.leftMotor1);
@@ -34,7 +34,7 @@ public class DriveBase extends Subsystem {
 		leftTalon2.set(RobotMap.leftMotor1);
 		rightTalon2.changeControlMode(CANTalon.TalonControlMode.Follower);
 		rightTalon2.set(RobotMap.rightMotor1);
-		
+
 	}
 
 	public void initDefaultCommand() {
@@ -42,8 +42,8 @@ public class DriveBase extends Subsystem {
 		System.out.println("set default command");
 	}
 
-	public void setTriggers(boolean pos) {
-		triggers = pos;
+	public void noDrive(boolean set) {
+		noDrive = set;
 	}
 
 	public void resetEncoders() {
@@ -51,7 +51,8 @@ public class DriveBase extends Subsystem {
 		rightTalon1.setEncPosition(0);
 	}
 
-	public void posDrive(double left, double right) {//Separate change control mode method??
+	public void posDrive(double left, double right) {// Separate change control
+														// mode method??
 		// if (triggers) {
 		leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
 		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
@@ -71,16 +72,18 @@ public class DriveBase extends Subsystem {
 		System.out.println("Left: " + left + "Right: " + right);
 		leftTalon1.set(2520 * left);
 		rightTalon1.set(2520 * right);
-		//}
+		// }
 	}
 
 	public void drive(double left, double right) {
-		leftTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-		rightTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		if (!noDrive) {
+			leftTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+			rightTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 
-		leftTalon1.set(left);
-		rightTalon1.set(right);
-		System.out.println("drive method");
+			leftTalon1.set(left);
+			rightTalon1.set(right);
+			System.out.println("drive method");
+		}
 	}
 
 	public void driveDistanceInches(double inches) {

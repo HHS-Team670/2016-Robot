@@ -19,6 +19,7 @@ public class PositionDrive extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.driveBase.resetEncoders();
+    	Robot.driveBase.noDrive(true);
     }
 
     // Called repeatedly when this Command is scheduled to run

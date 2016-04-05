@@ -15,7 +15,6 @@ import org.usfirst.frc.team670.robot.commands.ShootingPosition;
 import org.usfirst.frc.team670.robot.commands.PushBall;
 import org.usfirst.frc.team670.robot.commands.SwitchPusher;
 import org.usfirst.frc.team670.robot.commands.SwitchShooter;
-import org.usfirst.frc.team670.robot.commands.SwitchTriggers;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -53,8 +52,8 @@ public class OI {
 		
 		startPosDriveModeButt.whenPressed(new PositionDrive(false));
   		endPosDriveModeButt.whenPressed(new CancelDrive());
-		startPosDriveButt.whileHeld(new PositionDrive(true));//whileHeld??
-		//startPosDriveButt.whenReleased(new PositionDrive(false));
+		startPosDriveButt.whenPressed(new PositionDrive(true));
+		startPosDriveButt.whenReleased(new PositionDrive(false));
 		
 		drivingPosition.whenPressed(new DrivingPosition());
 		drivingPosition2.whenPressed(new DrivingPosition());
