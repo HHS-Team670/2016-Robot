@@ -163,8 +163,8 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during operator control
 	 */
 	public void teleopPeriodic() {
-		/*
 		Scheduler.getInstance().run();
+		/*
 		CaptureImage();
 		//NIVision.imaqWriteJPEGFile(frame, "/images/vision.jpg", 100, colorTable);
 		*/

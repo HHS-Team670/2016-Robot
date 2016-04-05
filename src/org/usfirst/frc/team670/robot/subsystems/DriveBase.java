@@ -37,7 +37,8 @@ public class DriveBase extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		// setDefaultCommand(new DriveWithJoystick());
+		if(!(rightTalon1.getControlMode().equals(CANTalon.TalonControlMode.Position)))
+			setDefaultCommand(new DriveWithJoystick());
 		System.out.println("set default command");
 	}
 

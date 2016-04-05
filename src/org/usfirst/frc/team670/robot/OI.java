@@ -3,6 +3,7 @@ package org.usfirst.frc.team670.robot;
 import org.usfirst.frc.team670.robot.commands.IntakeSequence;
 import org.usfirst.frc.team670.robot.commands.ShootingSequence;
 import org.usfirst.frc.team670.robot.commands.CancelCommand;
+import org.usfirst.frc.team670.robot.commands.CancelDrive;
 import org.usfirst.frc.team670.robot.commands.DrivingPosition;
 import org.usfirst.frc.team670.robot.commands.IntakeLowBarPosition;
 import org.usfirst.frc.team670.robot.commands.ManualSpinIntake;
@@ -12,6 +13,7 @@ import org.usfirst.frc.team670.robot.commands.SpinIntake;
 import org.usfirst.frc.team670.robot.commands.Shoot;
 import org.usfirst.frc.team670.robot.commands.ShootingPosition;
 import org.usfirst.frc.team670.robot.commands.PushBall;
+import org.usfirst.frc.team670.robot.commands.ReleaseTriggers;
 import org.usfirst.frc.team670.robot.commands.SwitchPusher;
 import org.usfirst.frc.team670.robot.commands.SwitchShooter;
 import org.usfirst.frc.team670.robot.commands.SwitchTriggers;
@@ -51,9 +53,9 @@ public class OI {
 	public OI(){
 		
 		startPosDriveModeButt.whenPressed(new PositionDrive(false));
-		endPosDriveModeButt.whenPressed(new CancelCommand());
+  		endPosDriveModeButt.whenPressed(new CancelDrive());
 		startPosDriveButt.whenPressed(new PositionDrive(true));//whileHeld??
-		startPosDriveButt.whenReleased(new CancelCommand());
+		startPosDriveButt.whenReleased(new ReleaseTriggers());
 		
 		drivingPosition.whenPressed(new DrivingPosition());
 		drivingPosition2.whenPressed(new DrivingPosition());
