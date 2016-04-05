@@ -34,11 +34,11 @@ public class DriveBase extends Subsystem {
 		leftTalon2.set(RobotMap.leftMotor1);
 		rightTalon2.changeControlMode(CANTalon.TalonControlMode.Follower);
 		rightTalon2.set(RobotMap.rightMotor1);
+		
 	}
 
 	public void initDefaultCommand() {
-		if(!(rightTalon1.getControlMode().equals(CANTalon.TalonControlMode.Position)))
-			setDefaultCommand(new DriveWithJoystick());
+		setDefaultCommand(new DriveWithJoystick());
 		System.out.println("set default command");
 	}
 
