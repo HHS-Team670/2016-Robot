@@ -10,35 +10,33 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveDistance extends Command {
 
 	private double distance;
-	
-    public DriveDistance(double distance) {
-    	requires(Robot.driveBase);
-    	this.distance = distance;
-    }
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    }
+	public DriveDistance(double distance) {
+		requires(Robot.driveBase);
+		this.distance = distance;
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	Robot.driveBase.driveDistanceInches(distance);
-    	System.out.println("DriveDistance execute");
-    }
+	// Called just before this Command runs the first time
+	protected void initialize() {
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return true;
-    }
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+		Robot.driveBase.driveDistanceInches(distance);
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    	System.out.println("DriveDistance end");
-    	
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		return true;
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+	// Called once after isFinished returns true
+	protected void end() {
+
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+	}
 }

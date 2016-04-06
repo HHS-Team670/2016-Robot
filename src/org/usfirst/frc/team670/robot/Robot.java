@@ -5,7 +5,6 @@ import org.usfirst.frc.team670.robot.commands.DriveDistance;
 import org.usfirst.frc.team670.robot.commands.LowBarShootAuto;
 import org.usfirst.frc.team670.robot.commands.OtherAuto;
 import org.usfirst.frc.team670.robot.commands.LowBarAuto;
-import org.usfirst.frc.team670.robot.commands.DriveSpeed;
 import org.usfirst.frc.team670.robot.commands.SpyAuto;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Intake;
@@ -67,25 +66,24 @@ public class Robot extends IterativeRobot {
 		autoChooser.addObject("Do Nothing", new CancelCommand());
 		autoChooser.addObject("PID Test", new DriveDistance(3));
 		/*
-		autoChooser.addObject("Spy Bot", new SpyAuto());
-		autoChooser.addObject("Low Bar and Shoot", new LowBarShootAuto());
-		autoChooser.addObject("Rough Terrain", new DriveSpeed(3, 3));
-		autoChooser.addObject("Ramparts", new DriveSpeed(3, 3));
-		autoChooser.addObject("Rock Wall", new DriveSpeed(3, 3));
-		autoChooser.addObject("Moat", new DriveSpeed(3, 3));
-		autoChooser.addObject("Low Bar", new DriveSpeed(3, 3));
-		autoChooser.addObject("No PID", new NoPIDDrive(.75, 6));
-		*/
+		 * autoChooser.addObject("Spy Bot", new SpyAuto());
+		 * autoChooser.addObject("Low Bar and Shoot", new LowBarShootAuto());
+		 * autoChooser.addObject("Rough Terrain", new DriveSpeed(3, 3));
+		 * autoChooser.addObject("Ramparts", new DriveSpeed(3, 3));
+		 * autoChooser.addObject("Rock Wall", new DriveSpeed(3, 3));
+		 * autoChooser.addObject("Moat", new DriveSpeed(3, 3));
+		 * autoChooser.addObject("Low Bar", new DriveSpeed(3, 3));
+		 * autoChooser.addObject("No PID", new NoPIDDrive(.75, 6));
+		 */
 		SmartDashboard.putData("Autonomous Command Chooser", autoChooser);
-		/*
+
 		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 		netTable = NetworkTable.getTable("camera");
-		// the camera name (ex "cam0") can be found through the roborio web interface
-		session = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+		NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
 		NIVision.IMAQdxConfigureGrab(session);
 		colorTable = new NIVision.RawData();
 		System.out.println((Command) autoChooser.getSelected());
-		*/
+
 	}
 
 	/**
@@ -128,12 +126,8 @@ public class Robot extends IterativeRobot {
 
 		if (autoCommand != null)
 			autoCommand.cancel();
-		/*
+
 		NIVision.IMAQdxStartAcquisition(session);
-		/*
-		 * grab an image, draw the circle, and provide it for the camera server
-		 * which will in turn send it to the dashboard.
-		 
 
 		while (isOperatorControl() && isEnabled()) {
 
@@ -142,21 +136,19 @@ public class Robot extends IterativeRobot {
 			int x = (int) netTable.getNumber("x", 10);
 			int y = (int) netTable.getNumber("y", 10);
 
-			System.out.println("Width: " + width + " Height: " + height
-					+ " X: " + x + " Y: " + y);
+			System.out.println("Width: " + width + " Height: " + height + " X: " + x + " Y: " + y);
 			NIVision.Rect rect = new NIVision.Rect(x, y, width, height);
 
 			NIVision.IMAQdxGrab(session, frame, 1);
 
-			//NIVision.imaqWriteJPEGFile(frame, "/images/vision.jpg", 100,
-				//	colorTable);
-			NIVision.imaqDrawShapeOnImage(frame, frame, rect,
-					DrawMode.PAINT_VALUE, ShapeMode.SHAPE_RECT, 0.0f);
+			NIVision.imaqWriteJPEGFile(frame, "/images/vision.jpg", 100, colorTable);
+			NIVision.imaqDrawShapeOnImage(frame, frame, rect, DrawMode.PAINT_VALUE, ShapeMode.SHAPE_RECT, 0.0f);
 
 			CameraServer.getInstance().setImage(frame);
 			Timer.delay(0.005); // wait for a motor update time
 		}
-		NIVision.IMAQdxStopAcquisition(session);*/
+		NIVision.IMAQdxStopAcquisition(session);
+
 	}
 
 	/**
@@ -164,38 +156,36 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		/*
+
 		CaptureImage();
-		//NIVision.imaqWriteJPEGFile(frame, "/images/vision.jpg", 100, colorTable);
-		*/
-		
+		NIVision.imaqWriteJPEGFile(frame, "/images/vision.jpg", 100, colorTable);
+
 	}
 
 	/**
 	 * This function is called periodically during test mode
 	 */
-	public void CaptureImage(){
+	public void CaptureImage() {
 		NIVision.IMAQdxStartAcquisition(session);
-		int width = (int) netTable.getNumber("width", 30*2);
-		int height = (int) netTable.getNumber("height", 50*2);
-		int x = (int) netTable.getNumber("x", 186*2+19);
-		int y = (int) netTable.getNumber("y", 40*1.5);
+		int width = (int) netTable.getNumber("width", 30 * 2);
+		int height = (int) netTable.getNumber("height", 50 * 2);
+		int x = (int) netTable.getNumber("x", 186 * 2 + 19);
+		int y = (int) netTable.getNumber("y", 40 * 1.5);
 
-//		System.out.println("Width: " + width + " Height: " + height
-			//	+ " X: " + x + " Y: " + y);
+		// System.out.println("Width: " + width + " Height: " + height
+		// + " X: " + x + " Y: " + y);
 		NIVision.Rect rect = new NIVision.Rect(y, x, height, width);
-		
+
 		NIVision.IMAQdxGrab(session, frame, 1);
-	
-		NIVision.imaqDrawShapeOnImage(frame, frame, rect,
-		DrawMode.PAINT_INVERT, ShapeMode.SHAPE_RECT, 0.0f);
+
+		NIVision.imaqDrawShapeOnImage(frame, frame, rect, DrawMode.PAINT_INVERT, ShapeMode.SHAPE_RECT, 0.0f);
 		CameraServer.getInstance().setImage(frame);
-		
-		Timer.delay(0.005); // wait for a motor update time	
-		//NIVision.imaqWriteJPEGFile(frame, "/images/vision.jpg", 100, colorTable);
+
+		Timer.delay(0.005); // wait for a motor update time
+		NIVision.imaqWriteJPEGFile(frame, "/images/vision.jpg", 100, colorTable);
 
 	}
-	
+
 	public void testPeriodic() {
 		LiveWindow.run();
 	}
