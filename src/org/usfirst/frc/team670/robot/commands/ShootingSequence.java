@@ -10,7 +10,7 @@ public class ShootingSequence extends CommandGroup {
 		//get ball unstuck if stuck
 		//addSequential(new RunShooter(0.1),0.5);
 		//addSequential(new RunShooter(0),0.5);
-		addSequential(new Shoot(), 3);//spins shooter
+		addSequential(new Shoot(), 4);//spins shooter
 		addSequential(new RunPusher());//pushes hinge plate out and in
 		addSequential(new RunShooter(0), 0.1);//stops shooter
 	}

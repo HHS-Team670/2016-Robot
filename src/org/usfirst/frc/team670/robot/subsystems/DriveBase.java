@@ -13,7 +13,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class DriveBase extends Subsystem {
 	public static final double diameterInInches = 9.75;
-	public static final double circumferenceInInches = diameterInInches * Math.PI;
+	public static final double circumferenceInInches = diameterInInches
+			* Math.PI;
 	public static final double inchesPerTick = circumferenceInInches / 360;
 	public static final double pivotRadius = 16;
 
@@ -21,8 +22,6 @@ public class DriveBase extends Subsystem {
 	public CANTalon leftTalon2;
 	public CANTalon rightTalon1;
 	public CANTalon rightTalon2;
-
-	private boolean noDrive;
 
 	public DriveBase() {
 		leftTalon1 = new CANTalon(RobotMap.leftMotor1);
@@ -41,45 +40,51 @@ public class DriveBase extends Subsystem {
 		setDefaultCommand(new DriveWithJoystick());
 	}
 
-	public void noDrive(boolean set) {
-		noDrive = set;
-	}
-
-	public void resetEncoders() {
-		leftTalon1.setEncPosition(0);
+	public void resetRightEncoder() {
 		rightTalon1.setEncPosition(0);
 	}
 
-	public void posDrive(double left, double right) {// Separate change control
-														// mode method??
+	public void resetLeftEncoder() {
+		leftTalon1.setEncPosition(0);
+	}
+
+	public void posDriveLeft(double left) {// Separate change
+															// control
+															// mode method??
 		leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
 		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		leftTalon1.reverseSensor(true);
 
+		double p = .8;
+		double i = .001;// .0001
+		double d = 0;// .8
+
+		leftTalon1.setPID(p, i, d);
+
+		leftTalon1.set(2520 * left * 0.5);
+	}
+
+	public void posDriveRight(double right) {// Separate change
+										
 		rightTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
 		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		rightTalon1.reverseSensor(true);
 
-		double p = .527;
-		double i = .00003;// .0001
+		double p = .8;
+		double i = .001;// .0001
 		double d = 0;// .8
 
-		leftTalon1.setPID(p, i, d);
 		rightTalon1.setPID(p, i, d);
-
-		System.out.println("Left: " + left + "Right: " + right);
-		leftTalon1.set(2520 * left);
-		rightTalon1.set(2520 * right);
+		
+		rightTalon1.set(2520 * right * 0.5);
 	}
 
 	public void drive(double left, double right) {
-		if (!noDrive) {
-			leftTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-			rightTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		leftTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		rightTalon1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 
-			leftTalon1.set(left);
-			rightTalon1.set(right);
-		}
+		leftTalon1.set(left);
+		rightTalon1.set(right);
 	}
 
 	public void driveDistanceInches(double inches) {
@@ -100,17 +105,17 @@ public class DriveBase extends Subsystem {
 		rightTalon1.reverseSensor(true);
 		// rightTalon1.setAllowableClosedLoopErr(0);
 
-		double p = .527;
-		double i = .00003;// .0001
-		double d = 0;// .8
+		double p = .8;// .527
+		double i = .001;// .04
+		double d = 0;// 1
 
 		// leftTalon1.setCloseLoopRampRate(1);
 		leftTalon1.setPID(p, i, d);
 		// rightTalon1.setCloseLoopRampRate(1);
 		rightTalon1.setPID(p, i, d);
 		// 2520
-		leftTalon1.set(1440);
-		rightTalon1.set(1440);
+		leftTalon1.set(2520);
+		rightTalon1.set(2520);
 	}
 
 	public void pivot(double degrees) {

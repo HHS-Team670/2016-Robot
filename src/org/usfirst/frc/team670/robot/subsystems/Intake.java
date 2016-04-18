@@ -31,6 +31,10 @@ public class Intake extends Subsystem {
 	public void spinIntake() {
 		intakeTalon.set(0.75);
 	}
+	
+	public void spinIntakeReverse() {
+		intakeTalon.set(-0.75);
+	}
 
 	public void stopIntake() {
 		intakeTalon.set(0);

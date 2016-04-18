@@ -13,6 +13,7 @@ import org.usfirst.frc.team670.robot.commands.SpinIntake;
 import org.usfirst.frc.team670.robot.commands.Shoot;
 import org.usfirst.frc.team670.robot.commands.ShootingPosition;
 import org.usfirst.frc.team670.robot.commands.PushBall;
+import org.usfirst.frc.team670.robot.commands.SpinIntakeReverse;
 import org.usfirst.frc.team670.robot.commands.SwitchPusher;
 import org.usfirst.frc.team670.robot.commands.SwitchShooter;
 
@@ -32,7 +33,7 @@ public class OI {
 	private Joystick arcButtons = new Joystick(RobotMap.arcButtons);
 	
 	private Button drivingPosition = new JoystickButton(arcButtons, 1);
-	private Button drivingPosition2 = new JoystickButton(arcButtons, 2);
+	//private Button spinintakeReverse = new JoystickButton(arcButtons, 2);
 	private Button intakePosButt = new JoystickButton(arcButtons, 3);
 	private Button intakeRollerButt = new JoystickButton(arcButtons, 4);
 	private Button shooterPosButt = new JoystickButton(arcButtons, 5);
@@ -50,13 +51,13 @@ public class OI {
 	
 	public OI(){
 		
-		startPosDriveModeButt.whenPressed(new PositionDrive(false));
+		startPosDriveModeButt.whenPressed(new PositionDrive());
   		endPosDriveModeButt.whenPressed(new CancelDrive());
-		startPosDriveButt.whenPressed(new PositionDrive(true));
-		startPosDriveButt.whenReleased(new PositionDrive(false));
+		//startPosDriveButt.whenPressed(new PositionDrive(true));
+		//startPosDriveButt.whenReleased(new PositionDrive(false));
 		
 		drivingPosition.whenPressed(new DrivingPosition());
-		drivingPosition2.whenPressed(new DrivingPosition());
+		//spinintakeReverse.whenPressed(new SpinIntakeReverse());
 		intakePosButt.whenPressed(new MoveIntake());
 		intakeRollerButt.whileHeld(new ManualSpinIntake());
 		shooterPosButt.whenPressed(new SwitchShooter());

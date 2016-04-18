@@ -50,7 +50,7 @@ public class Robot extends IterativeRobot {
 	int width = 30 * 2;
 	int height = 50 * 2;
 	int x = 186 * 2 + 19;
-	int y = (int) (40 * 1.5);
+	int y = 129;
 	double RectangleLeftCoordinate;
 	double RectangleTopCoordinate;
 	double RectangleRightCoordinate;
@@ -72,9 +72,9 @@ public class Robot extends IterativeRobot {
 	double IDEAL_VERTICAL_ANGLE[] = { 0, 0, 0 };
 
 	// Constants
-	NIVision.Range TARGET_SAT_RANGE = new NIVision.Range(34, 101);
-	NIVision.Range TARGET_HUE_RANGE = new NIVision.Range(34, 79);
-	NIVision.Range TARGET_VAL_RANGE = new NIVision.Range(128, 225);
+	NIVision.Range TARGET_SAT_RANGE = new NIVision.Range(0, 16);
+	NIVision.Range TARGET_HUE_RANGE = new NIVision.Range(0, 180);
+	NIVision.Range TARGET_VAL_RANGE = new NIVision.Range(227, 255);
 
 	double AREA_MINIMUM = 0.1; // Default Area minimum for particle as a
 								// percentage of total image area
@@ -109,7 +109,8 @@ public class Robot extends IterativeRobot {
 
 		autoChooser = new SendableChooser();
 		autoChooser.addDefault("Low Bar", new LowBarAuto(.75, 1.75));
-		autoChooser.addObject("Other Obstacle", new OtherAuto(.75, 2));
+		autoChooser.addObject("Other Obstacle", new OtherAuto(.78, 2));
+		autoChooser.addObject("HIGHER POWER IF DELAY", new OtherAuto(.85, 2));
 		autoChooser.addObject("Do Nothing", new CancelCommand());
 		autoChooser.addObject("PID Test", new DriveDistance(3));
 		/*
@@ -178,46 +179,57 @@ public class Robot extends IterativeRobot {
 		if (autoCommand != null)
 			autoCommand.cancel();
 
-		NIVision.IMAQdxStartAcquisition(session);
-
-		while (isOperatorControl() && isEnabled()) {
-
-			NIVision.IMAQdxGrab(session, frame, 1);
-	          
-            processImage();
-                        
-            DrawGoal();
-
-			CameraServer.getInstance().setImage(frame);
-			Timer.delay(0.005); // wait for a motor update time
-		}
-		NIVision.IMAQdxStopAcquisition(session);
 
 	}
 
-	/**
+	/**00000000000000000
 	 * This function is called periodically during operator control
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-
+		CaptureImage();
 	}
 
+	public void CaptureImage(){
+		NIVision.IMAQdxStartAcquisition(session);
+
+		NIVision.Rect rect = new NIVision.Rect(y, x, height, width);
+		
+		NIVision.IMAQdxGrab(session, frame, 1);
+	
+	    //processImage();
+        
+       //DrawGoal();
+		
+		NIVision.imaqDrawShapeOnImage(frame, frame, rect, DrawMode.PAINT_INVERT, ShapeMode.SHAPE_RECT, 0.0f);
+		
+		CameraServer.getInstance().setImage(frame);
+		
+		Timer.delay(0.005);
+	}
+	
 	public void testPeriodic() {
 		LiveWindow.run();
 	}
 
 	public void CheckIfTargeted(){
+		String Shot = "No shot valid";
     	int xGoal = (int)RectangleTopCoordinate;
 		int yGoal = (int)RectangleLeftCoordinate;
-		if(xGoal == x || yGoal == y){
-			SmartDashboard.putBoolean("Goal!", true);
+		if(xGoal >= x-5 && xGoal <= x+5){
+			if(yGoal >= y-5 && yGoal <= y+5){
+				Shot = "TAKE THE SHOT!";
+			}
+			else{
+				Shot = "Move Sideways";
+			}
 		}
+		else{
+			Shot = "Move up or down";
+		}
+		SmartDashboard.putString("Status", Shot);
     }
-    public void DrawShotBox(){
-    	NIVision.Rect rect = new NIVision.Rect(x, y, height, width);
-   		NIVision.imaqDrawShapeOnImage(frame, frame, rect, DrawMode.PAINT_VALUE, ShapeMode.SHAPE_RECT, 50.0f);
-    }
+
     
     //Returns the boolean that checks if a target of any resemblance is detected
     public boolean getTargetFound(){
@@ -237,9 +249,13 @@ public class Robot extends IterativeRobot {
 		int left = (int)RectangleLeftCoordinate;
 		int width = (int)(RectangleRightCoordinate - RectangleLeftCoordinate);
 		int height = (int)(RectangleBottomCoordinate - RectangleTopCoordinate);
-        NIVision.Rect rect = new NIVision.Rect(top, left, height, width);
+		System.out.println(top + ", " + left + ", " + height + ", " + width);
+		NIVision.Rect rect = new NIVision.Rect(top, left, height, width);
 		NIVision.imaqDrawShapeOnImage(frame, frame, rect, DrawMode.PAINT_VALUE, ShapeMode.SHAPE_RECT, 100.0f);
+	
 	}
+	
+	
 
 	public void processImage(){
 		//Threshold the image looking for green (retroreflective target color)
