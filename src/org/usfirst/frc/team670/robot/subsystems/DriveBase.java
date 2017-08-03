@@ -3,8 +3,7 @@ package org.usfirst.frc.team670.robot.subsystems;
 import org.usfirst.frc.team670.robot.RobotMap;
 import org.usfirst.frc.team670.robot.commands.DriveWithJoystick;
 
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -49,34 +48,11 @@ public class DriveBase extends Subsystem {
 	}
 
 	public void posDriveLeft(double left) {// Separate change
-															// control
-															// mode method??
-		leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
-		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		leftTalon1.reverseSensor(true);
-
-		double p = .8;
-		double i = .001;// .0001
-		double d = 0;// .8
-
-		leftTalon1.setPID(p, i, d);
-
-		leftTalon1.set(2520 * left * 0.5);
+	
 	}
 
 	public void posDriveRight(double right) {// Separate change
-										
-		rightTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
-		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		rightTalon1.reverseSensor(true);
-
-		double p = .8;
-		double i = .001;// .0001
-		double d = 0;// .8
-
-		rightTalon1.setPID(p, i, d);
 		
-		rightTalon1.set(2520 * right * 0.5);
 	}
 
 	public void drive(double left, double right) {
@@ -89,62 +65,9 @@ public class DriveBase extends Subsystem {
 
 	public void driveDistanceInches(double inches) {
 
-		double numTicks = ((inches / inchesPerTick) / 360) * 2520;
-
-		leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
-		System.out.println("Left Talon mode: " + leftTalon1.getControlMode());
-		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		leftTalon1.setEncPosition(0);
-		leftTalon1.reverseSensor(true);
-		// leftTalon1.setAllowableClosedLoopErr(0);
-
-		rightTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
-		System.out.println("Right Talon mode: " + rightTalon1.getControlMode());
-		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		rightTalon1.setEncPosition(0);
-		rightTalon1.reverseSensor(true);
-		// rightTalon1.setAllowableClosedLoopErr(0);
-
-		double p = .8;// .527
-		double i = .001;// .04
-		double d = 0;// 1
-
-		// leftTalon1.setCloseLoopRampRate(1);
-		leftTalon1.setPID(p, i, d);
-		// rightTalon1.setCloseLoopRampRate(1);
-		rightTalon1.setPID(p, i, d);
-		// 2520
-		leftTalon1.set(2520);
-		rightTalon1.set(2520);
 	}
 
 	public void pivot(double degrees) {
-		double pivotCircumference = 2 * Math.PI * pivotRadius;
-		double pivotArcLength = (degrees / 360) * pivotCircumference;
-		double numTicks = ((pivotArcLength / inchesPerTick) / 360) * 2520;
-
-		leftTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
-		leftTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		leftTalon1.setEncPosition(0);
-		// leftTalon1.reverseSensor(true);
-		// leftTalon1.setAllowableClosedLoopErr(0);
-
-		rightTalon1.changeControlMode(CANTalon.TalonControlMode.Position);
-		rightTalon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		rightTalon1.setEncPosition(0);
-		// rightTalon1.reverseSensor(true);
-		// rightTalon1.setAllowableClosedLoopErr(0);
-
-		double p = .8;
-		double i = .0025;
-		double d = .8;
-
-		// leftTalon1.setCloseLoopRampRate(1);
-		leftTalon1.setPID(p, i, d);
-		// rightTalon1.setCloseLoopRampRate(1);
-		rightTalon1.setPID(p, i, d);
-
-		leftTalon1.set(numTicks);
-		rightTalon1.set(-numTicks);
+		
 	}
 }

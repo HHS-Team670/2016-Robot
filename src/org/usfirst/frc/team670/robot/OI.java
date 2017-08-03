@@ -32,18 +32,18 @@ public class OI {
 	private Joystick operatorStick = new Joystick(RobotMap.operatorStick);
 	private Joystick arcButtons = new Joystick(RobotMap.arcButtons);
 	
-	private Button drivingPosition = new JoystickButton(arcButtons, 1);
+	private Button drivingPosition = new JoystickButton(operatorStick, 4);
 	//private Button spinintakeReverse = new JoystickButton(arcButtons, 2);
 	private Button intakePosButt = new JoystickButton(arcButtons, 3);
 	private Button intakeRollerButt = new JoystickButton(arcButtons, 4);
 	private Button shooterPosButt = new JoystickButton(arcButtons, 5);
 	private Button hingePlateButt = new JoystickButton(arcButtons, 6);
-	private Button intakeLowBarPosition = new JoystickButton(arcButtons, 7);
-	private Button autoIntake = new JoystickButton(arcButtons, 8);
-	private Button shootingPosition = new JoystickButton(arcButtons, 9);
-	private Button autoShoot = new JoystickButton(arcButtons, 10);
+	private Button intakeLowBarPosition = new JoystickButton(operatorStick, 3);
+	private Button autoIntake = new JoystickButton(operatorStick, 2);
+	private Button shootingPosition = new JoystickButton(operatorStick, 5);
+	private Button autoShoot = new JoystickButton(operatorStick, 1);
 	
-	private Button cancel = new JoystickButton(operatorStick, 1);
+	private Button cancel = new JoystickButton(operatorStick, 6);
 	
 	private Button startPosDriveModeButt = new JoystickButton(rightDriveStick, 3);
 	private Button endPosDriveModeButt = new JoystickButton(rightDriveStick, 2);
