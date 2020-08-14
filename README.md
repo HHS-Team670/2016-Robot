@@ -7,7 +7,7 @@ https://docs.google.com/document/d/1vO_dtVTDw3-l0x0BabiAE5C45O6bJlQeLL1Uy9McOcQ/
 **Note that you cannot commit directly to master or dev!**<br/>
 This project shall follow the following workflow:<br/>
 
-The master branch is considered the stable branch of this project. It may only be updated via pull request from student developer, and then only with Shaylan's approval.<br/>
+The master branch is considered the stable branch of this project. It may only be updated via pull request from student developer, and then only with Code Leads' approval.<br/>
 
 The dev branch is the main working branch. It may only be updated by pull request from uncontrolled branches.<br/>
 
